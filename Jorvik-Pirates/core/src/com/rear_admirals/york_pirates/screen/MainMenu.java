@@ -157,5 +157,6 @@ public class MainMenu extends BaseScreen {
 
     @Override
     public void dispose() {
+        stage.dispose();
     }
 }
