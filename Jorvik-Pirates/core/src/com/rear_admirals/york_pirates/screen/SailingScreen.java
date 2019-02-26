@@ -351,7 +351,7 @@ public class SailingScreen extends BaseScreen {
             playerShip.addAccelerationAS(playerShip.getRotation(), 10000);
         } else {
             playerShip.setAccelerationXY(0, 0);
-            playerShip.setDeceleration(100);
+            playerShip.setDeceleration(500);
         }
     }
 

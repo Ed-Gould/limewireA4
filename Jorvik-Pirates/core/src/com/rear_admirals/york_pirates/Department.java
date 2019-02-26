@@ -26,10 +26,10 @@ public class Department {
     public boolean purchase() {
         if (pirateGame.getPlayer().payGold(getPrice())) {
             Ship playerShip = pirateGame.getPlayer().getPlayerShip();
-            if (product == "Defence") {
+            if (product.equals("Defence")) {
                 playerShip.setDefence(playerShip.getDefence() + 1);
                 return true;
-            } else if (product == "Attack") {
+            } else if (product.equals("Attack")) {
                 playerShip.setAttack(playerShip.getAttack() + 1);
                 return true;
             }
@@ -40,9 +40,9 @@ public class Department {
      * @return price of upgrade
      */
     public int getPrice() {
-        if (product == "Defence") {
+        if (product.equals("Defence")) {
             return (int) (base_price * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getDefence() - 3)));
-        } else if (product == "Attack") {
+        } else if (product.equals("Attack")) {
             return (int) (base_price * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAttack() - 3)));
         } else {
             throw new IllegalArgumentException("Invalid Department Product");
