@@ -27,10 +27,10 @@ public class Department {
         if (pirateGame.getPlayer().payGold(getPrice())) {
             Ship playerShip = pirateGame.getPlayer().getPlayerShip();
             if (product.equals("Defence")) {
-                playerShip.setDefence(playerShip.getDefence() + 1);
+                playerShip.addDefence(1);
                 return true;
             } else if (product.equals("Attack")) {
-                playerShip.setAttack(playerShip.getAttack() + 1);
+                playerShip.addAttack(1);
                 return true;
             }
         }return false;}

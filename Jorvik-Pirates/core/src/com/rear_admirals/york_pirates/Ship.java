@@ -168,7 +168,6 @@ public class Ship extends PhysicsActor {
         return healthMax;
     }
 
-
     public String getName() {
         return name;
     }
@@ -177,8 +176,26 @@ public class Ship extends PhysicsActor {
         return attack;
     }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public void addAttack(int increase){
+        this.attack = attack + increase;
+    }
+
     public int getDefence() {
         return defence;
+    }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
+        this.healthMax = defence * 20;
+    }
+
+    public void addDefence(int increase){
+        this.defence = defence + increase;
+        this.healthMax = (defence) * 20;
     }
 
     public int getAccuracy() {
@@ -187,6 +204,10 @@ public class Ship extends PhysicsActor {
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public String getType() {
@@ -205,22 +226,10 @@ public class Ship extends PhysicsActor {
         this.name = name;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public void setDefence(int defence) {
-        this.defence = defence;
-        this.healthMax = defence * 20;
-    }
-
     public void setAccuracy(int accuracy) {
         this.accuracy = accuracy;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     //Added For Assessment 3
     public int getGoldValue() {
