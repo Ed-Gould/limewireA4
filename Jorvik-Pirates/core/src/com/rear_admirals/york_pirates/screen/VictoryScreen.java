@@ -16,7 +16,7 @@ public class VictoryScreen extends BaseScreen {
     public VictoryScreen(PirateGame main, Boolean hasWon) {
         super(main);
         //Stores if the User has Won or Lost
-        hasWon = this.hasWon;
+        this.hasWon = hasWon;
 
         //Table used to store labels to align and position them relatively
         Table uiTable = new Table();
@@ -60,7 +60,7 @@ public class VictoryScreen extends BaseScreen {
 
             //If the player has won the game closes, If they have lost they are reset to the Sailing Screen
             if (hasWon) {
-                System.exit(0);
+                pirateGame.setScreen(new MainMenu(pirateGame));
             } else {
                 pirateGame.setScreen(pirateGame.getSailingScene());
             }
