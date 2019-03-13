@@ -210,6 +210,12 @@ public class Ship extends PhysicsActor {
         this.health = health;
     }
 
+    // A4: Added function to get health from max
+    public int getHealthFromMax(){
+        return this.healthMax - this.health;
+    }
+    // End of A4 change
+
     public String getType() {
         return type.getName();
     }
