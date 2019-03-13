@@ -15,7 +15,9 @@ public class DepartmentScreen extends BaseScreen {
 
     private Player player;
 
-    private Label pointsValueLabel, pointsTextLabel, goldValueLabel, goldTextLabel, healthTextLabel, healthValueLabel;
+    private Label pointsValueLabel, pointsTextLabel;
+    private Label goldValueLabel, goldTextLabel;
+    private Label healthTextLabel, healthValueLabel;
     private int toHeal;
     private int healthFromMax;
 

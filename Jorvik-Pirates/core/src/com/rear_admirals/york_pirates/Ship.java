@@ -236,7 +236,6 @@ public class Ship extends PhysicsActor {
         this.accuracy = accuracy;
     }
 
-
     //Added For Assessment 3
     public int getGoldValue() {
         return this.goldValue;

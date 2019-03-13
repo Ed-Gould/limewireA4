@@ -53,8 +53,12 @@ public class SailingScreen extends BaseScreen {
     private int[] backgroundLayers = {0, 1, 2};
     private int[] foregroundLayers = {3};
 
-    private Label pointsLabel;
-    private Label goldLabel;
+    // A4: Altered labels
+    private Label healthValueLabel, healthTextLabel;
+    private Label goldValueLabel, goldTextLabel;
+    private Label pointsValueLabel, pointsTextLabel;
+    // End of A4 change
+
     private Label mapMessage;
     private Label hintMessage;
 
@@ -71,21 +75,36 @@ public class SailingScreen extends BaseScreen {
         mainStage.addActor(playerShip);
         System.out.println("playerShip added");
 
+        // A4: Cleaned up code for UI table, added display for health
         Table uiTable = new Table();
 
-        Label pointsTextLabel = new Label("Points: ", main.getSkin(), "default_black");
-        pointsLabel = new Label(Integer.toString(main.getPlayer().getPoints()), main.getSkin(), "default_black");
-        pointsLabel.setAlignment(Align.left);
+        /* Creates labels for the health, gold, and points display.
+        These displays are separated into two labels each:
+        A "TextLabel": These labels are composed of a text element (either the world "Points" or "Gold")
+        A "ValueLabel": These labels are the integer value associated to the Text Labels (e.g. 40 for gold)
+        */
 
-        Label goldTextLabel = new Label("Gold:", main.getSkin(), "default_black");
-        goldLabel = new Label(Integer.toString(main.getPlayer().getGold()), main.getSkin(), "default_black");
-        goldLabel.setAlignment(Align.left);
+        healthTextLabel = new Label("Health: ", main.getSkin(), "default_black");
+        healthValueLabel = new Label(Integer.toString(main.getPlayer().getPlayerShip().getHealth()), main.getSkin(), "default_black");
+        healthValueLabel.setAlignment(Align.left);
 
-        uiTable.add(pointsTextLabel);
-        uiTable.add(pointsLabel).width(pointsTextLabel.getWidth());
+        goldTextLabel = new Label("Gold: ", main.getSkin(), "default_black");
+        goldValueLabel = new Label(Integer.toString(main.getPlayer().getGold()), main.getSkin(), "default_black");
+        goldValueLabel.setAlignment(Align.left);
+
+        pointsTextLabel = new Label("Points: ", main.getSkin(), "default_black");
+        pointsValueLabel = new Label(Integer.toString(main.getPlayer().getPoints()), main.getSkin(), "default_black");
+        pointsValueLabel.setAlignment(Align.left);
+
+        uiTable.add(healthTextLabel).fill();
+        uiTable.add(healthValueLabel).fill();
         uiTable.row();
         uiTable.add(goldTextLabel).fill();
-        uiTable.add(goldLabel).fill();
+        uiTable.add(goldValueLabel).fill();
+        uiTable.row();
+        uiTable.add(pointsTextLabel);
+        uiTable.add(pointsValueLabel).width(pointsTextLabel.getWidth());
+        // End of A4 change
 
         uiTable.align(Align.topRight);
         uiTable.setFillParent(true);
@@ -203,7 +222,7 @@ public class SailingScreen extends BaseScreen {
     @Override
     public void update(float delta) {
         removeList.clear();
-        goldLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
+        goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         this.playerShip.playerMove(delta);
 
         Boolean x = false;
@@ -217,7 +236,7 @@ public class SailingScreen extends BaseScreen {
 
                 //Roll a random chance to see if you are meeting an enemy ship
                 int roll = ThreadLocalRandom.current().nextInt(0, 10001);
-                int enemyChance = Integer.parseInt(pointsLabel.getText().toString()) / 2;
+                int enemyChance = Integer.parseInt(pointsValueLabel.getText().toString()) / 2;
                 if (enemyChance > 100) {
                     enemyChance = 100;
                 } else if (enemyChance < 10) {
@@ -260,7 +279,7 @@ public class SailingScreen extends BaseScreen {
                     College college = obstacle.getCollege();
                     if (Gdx.input.isKeyPressed(Input.Keys.F)) {
                         System.out.println("A college");
-                        if (!playerShip.getCollege().getAlly().contains(college) && obstacle.getCollege().isBossDead() == false) {
+                        if (!playerShip.getCollege().getAlly().contains(college) && !obstacle.getCollege().isBossDead()) {
                             System.out.println("Enemy");
 
                             //Altered For Assessment 3
@@ -318,7 +337,7 @@ public class SailingScreen extends BaseScreen {
         //Exponentially increases points
         timer += delta;
         if (timer > 1) {
-            int points_gain = Integer.parseInt(pointsLabel.getText().toString()) / 250;
+            int points_gain = Integer.parseInt(pointsValueLabel.getText().toString()) / 250;
             if (points_gain == 0) {
                 points_gain = 1;
             }
@@ -327,7 +346,7 @@ public class SailingScreen extends BaseScreen {
         }
         //End Altered
 
-        pointsLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
+        pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
     }
 
     @Override
