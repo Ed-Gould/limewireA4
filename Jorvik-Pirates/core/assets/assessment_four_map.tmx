@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="78" height="52" tilewidth="64" tileheight="64" infinite="0" nextlayerid="37" nextobjectid="911">
+ <tileset firstgid="1" source="rpg-tiles-64.tsx"/>
+ <tileset firstgid="261" source="map-tiles-64.tsx"/>
+ <layer id="32" name="Water" width="78" height="52">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKGL8v1TrsdQcNVUVVVVVVVVVVVVVVVVVVX1+QNzJ/sQ
+  </data>
+ </layer>
+ <layer id="33" name="Background" width="78" height="52">
+  <data encoding="base64" compression="zlib">
+   eJzt2sESgjAMhGF4CS++/3s6HjzRCs0m6abdf4aTzhA+FTrCcSilvHud161q77O9edbymm2HzNAz83a8c8u2Q2cYcbPaPTFjcXs6x6ibxY7NzWMOFrfs0Hky3Dzm9A6Zx2KGXB9YzO7mYXNjjPk3yp7c7DGu31as5yI3rGwzfV7jeZwreq+vaO95jm29Z8XvrPcacofrmtUMcVvBztttl7XULLfqdohb69h3cfslNyyd37CQY9/Z7ZvcsEaPW2a25GZPTkopSwz3PavFdM+4Smz32qvE9GxHZJ5rmMhnYpjWqd77jnBj+88nYt/ebiNmcvs/30y7qH3P/K5l2EXtn8Esyi16Brnln3OZZ2T8LJE5M6ti15t5ZtXcGJMVlqyU8ukD8dRY1g==
+  </data>
+ </layer>
+ <layer id="34" name="Buildings" width="78" height="52">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAD8Gz9gAAE=
+  </data>
+ </layer>
+ <layer id="36" name="Details" width="78" height="52">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAD8Gz9gAAE=
+  </data>
+ </layer>
+ <layer id="35" name="Overlay" width="78" height="52">
+  <data encoding="base64" compression="zlib">
+   eJztwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAD8Gz9gAAE=
+  </data>
+ </layer>
+ <objectgroup id="5" name="ObjectData">
+  <object id="1" name="player" x="2560" y="1536" width="25.3333" height="62.6667"/>
+ </objectgroup>
+ <objectgroup id="7" name="RegionData">
+  <object id="721" name="derwentregion" x="1600" y="0" width="1280" height="1152"/>
+  <object id="722" name="vanbrughregion" x="896" y="2240" width="1280" height="1088"/>
+  <object id="723" name="jamesregion" x="0" y="960" width="1088" height="1152"/>
+  <object id="740" name="langwithregion" x="3328" y="2176" width="1472" height="1152"/>
+  <object id="742" name="goodrickeregion" x="3648" y="832" width="1344" height="1152"/>
+ </objectgroup>
+ <objectgroup id="6" name="PhysicsData">
+  <object id="15" name="bound" x="0" y="0" width="4992" height="5"/>
+  <object id="16" name="bound" x="0" y="0" width="5" height="3328"/>
+  <object id="18" name="bound" x="0" y="3323" width="4992" height="5"/>
+  <object id="19" name="bound" x="4987" y="0" width="5" height="3328"/>
+  <object id="20" name="chemistry" x="3584" y="192" width="512" height="384"/>
+  <object id="754" name="physics" x="2560" y="2240" width="320" height="574.667"/>
+  <object id="767" name="maths" x="896" y="320" width="384" height="320"/>
+  <object id="774" name="derwent" x="1920" y="256" width="704" height="640"/>
+  <object id="797" name="langwith" x="3840" y="2432" width="704" height="448"/>
+  <object id="806" name="vanbrugh" x="1152" y="2688" width="576" height="384"/>
+  <object id="820" name="james" x="256" y="1216" width="512" height="704"/>
+  <object id="840" name="goodricke" x="4032" y="1152" width="832" height="384"/>
+  <object id="847" name="physics" x="2496" y="2368" width="64" height="384"/>
+  <object id="848" name="physics" x="2880" y="2176" width="64" height="512"/>
+  <object id="849" name="physics" x="2944" y="2304" width="64" height="320"/>
+  <object id="850" name="physics" x="2688" y="2112" width="192" height="128"/>
+  <object id="851" name="physics" x="2624" y="2176" width="64" height="64"/>
+  <object id="852" name="chemistry" x="3520" y="320" width="64" height="192"/>
+  <object id="853" name="chemistry" x="3648" y="576" width="384" height="64"/>
+  <object id="854" name="chemistry" x="3712" y="128" width="320" height="64"/>
+  <object id="857" name="chemistry" x="4096" y="256" width="64" height="192"/>
+  <object id="858" name="maths" x="1088" y="640" width="256" height="192"/>
+  <object id="859" name="maths" x="1280" y="384" width="64" height="256"/>
+  <object id="860" name="maths" x="1344" y="512" width="64" height="192"/>
+  <object id="861" name="maths" x="1024" y="640" width="64" height="128"/>
+  <object id="862" name="maths" x="960" y="640" width="64" height="64"/>
+  <object id="863" name="maths" x="832" y="448" width="64" height="64"/>
+  <object id="864" name="maths" x="960" y="256" width="256" height="64"/>
+  <object id="865" name="maths" x="1152" y="832" width="128" height="64"/>
+  <object id="866" name="vanbrugh" x="1728" y="2880" width="320" height="192"/>
+  <object id="867" name="vanbrugh" x="1152" y="2496" width="384" height="192"/>
+  <object id="868" name="vanbrugh" x="1280" y="2368" width="192" height="128"/>
+  <object id="869" name="vanbrugh" x="1344" y="3072" width="576" height="64"/>
+  <object id="870" name="vanbrugh" x="1472" y="3136" width="256" height="64"/>
+  <object id="871" name="vanbrugh" x="1728" y="2816" width="192" height="64"/>
+  <object id="872" name="vanbrugh" x="2048" y="2944" width="64" height="128"/>
+  <object id="873" name="vanbrugh" x="1088" y="2624" width="64" height="384"/>
+  <object id="874" name="vanbrugh" x="1024" y="2752" width="64" height="192"/>
+  <object id="875" name="vanbrugh" x="1216" y="2432" width="64" height="64"/>
+  <object id="876" name="vanbrugh" x="1536" y="2624" width="64" height="64"/>
+  <object id="877" name="vanbrugh" x="1728" y="2752" width="64" height="64"/>
+  <object id="878" name="langwith" x="3712" y="2880" width="640" height="64"/>
+  <object id="879" name="langwith" x="3968" y="2944" width="192" height="64"/>
+  <object id="880" name="langwith" x="3712" y="2560" width="128" height="320"/>
+  <object id="881" name="langwith" x="4544" y="2560" width="64" height="256"/>
+  <object id="882" name="langwith" x="4608" y="2624" width="64" height="192"/>
+  <object id="883" name="langwith" x="3648" y="2688" width="64" height="192"/>
+  <object id="884" name="langwith" x="3968" y="2368" width="512" height="64"/>
+  <object id="885" name="goodricke" x="4160" y="1024" width="640" height="128"/>
+  <object id="886" name="goodricke" x="4288" y="1536" width="576" height="128"/>
+  <object id="887" name="goodricke" x="4352" y="1664" width="512" height="64"/>
+  <object id="888" name="goodricke" x="4480" y="1728" width="320" height="64"/>
+  <object id="889" name="goodricke" x="4160" y="1536" width="128" height="64"/>
+  <object id="890" name="goodricke" x="3904" y="1216" width="128" height="256"/>
+  <object id="891" name="goodricke" x="4032" y="1088" width="128" height="64"/>
+  <object id="892" name="goodricke" x="3968" y="1152" width="64" height="64"/>
+  <object id="893" name="goodricke" x="4224" y="960" width="384" height="64"/>
+  <object id="894" name="goodricke" x="4864" y="1408" width="64" height="128"/>
+  <object id="895" name="derwent" x="1920" y="896" width="256" height="64"/>
+  <object id="896" name="derwent" x="2304" y="896" width="384" height="64"/>
+  <object id="897" name="derwent" x="2432" y="960" width="192" height="64"/>
+  <object id="898" name="derwent" x="2624" y="320" width="64" height="576"/>
+  <object id="899" name="derwent" x="2688" y="384" width="64" height="320"/>
+  <object id="900" name="derwent" x="1856" y="576" width="64" height="256"/>
+  <object id="901" name="derwent" x="1984" y="192" width="384" height="64"/>
+  <object id="902" name="james" x="768" y="1280" width="64" height="512"/>
+  <object id="903" name="james" x="832" y="1408" width="64" height="192"/>
+  <object id="904" name="james" x="192" y="1344" width="64" height="320"/>
+  <object id="905" name="james" x="320" y="1920" width="192" height="64"/>
+  <object id="906" name="james" x="256" y="1152" width="128" height="64"/>
+  <object id="907" name="james" x="576" y="1152" width="128" height="64"/>
+  <object id="908" name="james" x="256" y="1088" width="64" height="64"/>
+  <object id="910" name="james" x="646" y="1084" width="64" height="64"/>
+ </objectgroup>
+</map>
