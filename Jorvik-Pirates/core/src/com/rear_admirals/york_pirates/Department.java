@@ -7,13 +7,13 @@ public class Department {
 
     private final String name;
     private String product;
-    private int base_price;
+    private int baseUpgradeCost;
     private PirateGame pirateGame;
 
     public Department(String name, String product, PirateGame pirateGame) {
         this.name = name;
         this.product = product;
-        this.base_price = 10;
+        this.baseUpgradeCost = 10;
         this.pirateGame = pirateGame;
     }
 
@@ -24,13 +24,16 @@ public class Department {
      * @return - Boolean, purchase successful
      */
     public boolean purchase() {
-        if (pirateGame.getPlayer().payGold(getPrice())) {
+        if (pirateGame.getPlayer().payGold(getUpgradeCost())) {
             Ship playerShip = pirateGame.getPlayer().getPlayerShip();
-            if (product.equals("Defence")) {
+            if (product.equals("defence")) {
                 playerShip.addDefence(1);
                 return true;
-            } else if (product.equals("Attack")) {
+            } else if (product.equals("attack")) {
                 playerShip.addAttack(1);
+                return true;
+            } else if (product.equals("accuracy")) {
+                playerShip.addAccuracy(1);
                 return true;
             }
         }return false;}
@@ -40,13 +43,24 @@ public class Department {
      * @return price of upgrade
      */
     public int getPrice() {
-        if (product.equals("Defence")) {
-            return (int) (base_price * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getDefence() - 3)));
-        } else if (product.equals("Attack")) {
-            return (int) (base_price * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAttack() - 3)));
+        if (product.equals("defence")) {
+            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getDefence() - 3)));
+        } else if (product.equals("attack")) {
+            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAttack() - 3)));
         } else {
             throw new IllegalArgumentException("Invalid Department Product");
         }
+    }
+
+    public int getUpgradeCost() {
+        if (product.equals("defence")) {
+            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getDefence() - 3)));
+        } else if (product.equals("attack")) {
+            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAttack() - 3)));
+        } else if (product.equals("accuracy")) {
+            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAccuracy() - 3)));
+        }
+        return 0;
     }
     //End Altered
 

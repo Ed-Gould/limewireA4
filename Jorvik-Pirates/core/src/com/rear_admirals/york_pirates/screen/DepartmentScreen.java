@@ -68,7 +68,7 @@ public class DepartmentScreen extends BaseScreen {
         optionsTable.setFillParent(true);
         Label title = new Label(department.getName(), main.getSkin());
 
-        final TextButton upgrade = new TextButton("Upgrade Ship " + department.getProduct() + " for " + department.getPrice() + " gold", main.getSkin());
+        final TextButton upgrade = new TextButton("Upgrade Ship " + department.getProduct() + " for " + department.getUpgradeCost() + " gold", main.getSkin());
         final Label message = new Label("", main.getSkin());
         final TextButton heal = new TextButton("Repair Ship for "+ Integer.toString(getHealCost()) +" gold", main.getSkin());
 
@@ -76,7 +76,7 @@ public class DepartmentScreen extends BaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 department.purchase();
-                upgrade.setText("Upgrade Ship " + department.getProduct() + " for " + department.getPrice() + " gold");
+                upgrade.setText("Upgrade Ship " + department.getProduct() + " for " + department.getUpgradeCost() + " gold");
             }
         });
 

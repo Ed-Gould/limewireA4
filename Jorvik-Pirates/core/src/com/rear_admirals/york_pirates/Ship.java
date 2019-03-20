@@ -202,6 +202,13 @@ public class Ship extends PhysicsActor {
         return accuracy;
     }
 
+
+    // A4: Added function to increase accuracy
+    public void addAccuracy(int increase){
+        this.accuracy = accuracy + increase;
+    }
+    // End of A4 change
+
     public int getHealth() {
         return health;
     }
@@ -209,6 +216,17 @@ public class Ship extends PhysicsActor {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    // A4: Added function to heal variable amounts
+    public void heal(int value){ // Increase health by value
+        if (this.health + value > healthMax){
+            this.health = healthMax;
+        }
+        else{
+            this.health += value;
+        }
+    }
+    // End of A4 change
 
     // A4: Added function to get health from max
     public int getHealthFromMax(){
