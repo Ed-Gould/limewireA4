@@ -18,12 +18,14 @@ public class DepartmentScreen extends BaseScreen {
     private Label pointsValueLabel, pointsTextLabel;
     private Label goldValueLabel, goldTextLabel;
     private Label healthTextLabel, healthValueLabel;
+
     private int toHeal;
     private int healthFromMax;
 
     public DepartmentScreen(final PirateGame main, final Department department) {
         super(main);
         player = main.getPlayer();
+
         // A4: Added variable to get the amount of health required to heal to maximum
         this.healthFromMax = player.getPlayerShip().getHealthFromMax();
         // End of A4 change
@@ -99,6 +101,7 @@ public class DepartmentScreen extends BaseScreen {
         upgradeTable.add(upgradeText).padBottom(viewheight/40);
         upgradeTable.row();
         upgradeTable.add(upgradeButton);
+        // End of A4 change
 
         upgradeButton.addListener(new ClickListener() {
             @Override
@@ -142,6 +145,7 @@ public class DepartmentScreen extends BaseScreen {
                 }
             }
         });
+        // End of A4 change
 
         final TextButton playerMinigame = new TextButton("Play Minigame", main.getSkin());
         playerMinigame.addListener(new ClickListener() {
@@ -151,7 +155,6 @@ public class DepartmentScreen extends BaseScreen {
                 dispose();
             }
         });
-        // End of A4 change
 
         // A4: Changed table to be more visually appealing
         mainStage.addActor(titleText);
@@ -179,10 +182,8 @@ public class DepartmentScreen extends BaseScreen {
             System.out.println("ESCAPE");
             pirateGame.setScreen(pirateGame.getSailingScene());
         }
-
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
         healthFromMax = player.getPlayerShip().getHealthFromMax();
-
     }
 }
