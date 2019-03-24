@@ -7,17 +7,19 @@ public class Department {
 
     private final String name;
     private String product;
-    private int baseUpgradeCost;
+    private int baseUpgradeCost, costPerLevel;
     private PirateGame pirateGame;
+    private Ship playerShip;
 
     public Department(String name, String product, PirateGame pirateGame) {
         this.name = name;
         this.product = product;
-        this.baseUpgradeCost = 10;
+        this.baseUpgradeCost = 40;
+        this.costPerLevel = 10;
         this.pirateGame = pirateGame;
+        this.playerShip = pirateGame.getPlayer().getPlayerShip();
     }
 
-    //Altered For Assessment 3
 
     /**
      * Upgrade ship by spending gold.
@@ -42,27 +44,23 @@ public class Department {
      * Get the price of an upgrade from this department, taking into account current upgrade level
      * @return price of upgrade
      */
-    public int getPrice() {
-        if (product.equals("defence")) {
-            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getDefence() - 3)));
-        } else if (product.equals("attack")) {
-            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAttack() - 3)));
-        } else {
-            throw new IllegalArgumentException("Invalid Department Product");
-        }
-    }
-
+    // A4: Rework and rebalanced formula to calculate cost of upgrades
     public int getUpgradeCost() {
         if (product.equals("defence")) {
-            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getDefence() - 3)));
+            return calculateCost(playerShip.getDefence());
         } else if (product.equals("attack")) {
-            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAttack() - 3)));
+            return calculateCost(playerShip.getAttack());
         } else if (product.equals("accuracy")) {
-            return (int) (baseUpgradeCost * pow(2, max(0, pirateGame.getPlayer().getPlayerShip().getAccuracy() - 3)));
+            return calculateCost(playerShip.getAccuracy());
         }
         return 0;
     }
-    //End Altered
+
+    public int calculateCost(int upgradeStat){
+        // 5 is the starting value for players stats
+        return baseUpgradeCost + costPerLevel * (upgradeStat - 5);
+    }
+    // End of A4 change
 
     public String getName() {
         return name;

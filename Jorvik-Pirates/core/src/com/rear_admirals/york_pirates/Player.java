@@ -19,7 +19,7 @@ public class Player {
         //Altered For Assessment 3
         this.playerShip = new Ship(Player, "Your Ship", Derwent);
         //End Altered
-        this.gold = 0;
+        this.gold = 1000;
         this.points = 0;
 
         attacks.add(Ram.attackRam);
