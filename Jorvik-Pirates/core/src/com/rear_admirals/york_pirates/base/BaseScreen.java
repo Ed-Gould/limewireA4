@@ -2,10 +2,16 @@ package com.rear_admirals.york_pirates.base;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rear_admirals.york_pirates.PirateGame;
+import com.rear_admirals.york_pirates.Ship;
+
+import java.awt.image.TileObserver;
 
 public abstract class BaseScreen implements Screen {
 
@@ -14,13 +20,13 @@ public abstract class BaseScreen implements Screen {
 
     protected PirateGame pirateGame;
 
-    protected final int viewwidth = 1920;
-    protected final int viewheight = 1080;
+    protected final int viewWidth = 1920;
+    protected final int viewHeight = 1080;
 
     public BaseScreen(PirateGame game) {
         this.pirateGame = game;
-        this.mainStage = new Stage(new FitViewport(this.viewwidth, this.viewheight));
-        this.uiStage = new Stage(new FitViewport(this.viewwidth, this.viewheight));
+        this.mainStage = new Stage(new FitViewport(this.viewWidth, this.viewHeight));
+        this.uiStage = new Stage(new FitViewport(this.viewWidth, this.viewHeight));
     }
 
     public abstract void update(float delta);

@@ -73,7 +73,7 @@ public class DepartmentScreen extends BaseScreen {
 
         // Create and align text and buttons for healing options
         Table healTable = new Table();
-        healTable.setX(viewwidth * -0.2f, Align.center);
+        healTable.setX(viewWidth * -0.2f, Align.center);
         healTable.setFillParent(true);
 
         final Label healText = new Label("Heal", main.getSkin(), "title");
@@ -82,23 +82,23 @@ public class DepartmentScreen extends BaseScreen {
         final Label healMessage = new Label("health status", main.getSkin());
         if (healthFromMax == 0) { healMessage.setText("Your ship is fully repaired."); }
 
-        healTable.add(healText).padBottom(viewheight/40);
+        healTable.add(healText).padBottom(viewHeight/40);
         healTable.row();
-        healTable.add(healFullBtn).padBottom(viewheight/40);
+        healTable.add(healFullBtn).padBottom(viewHeight/40);
         healTable.row();
-        healTable.add(healTenBtn).padBottom(viewheight/40);
+        healTable.add(healTenBtn).padBottom(viewHeight/40);
         healTable.row();
         healTable.add(healMessage);
 
         // Create buttons used to show upgrade options
         Table upgradeTable = new Table();
-        upgradeTable.setX(viewwidth * 0.2f, Align.center);
+        upgradeTable.setX(viewWidth * 0.2f, Align.center);
         upgradeTable.setFillParent(true);
 
         final Label upgradeText = new Label("Upgrade", main.getSkin(), "title");
         final TextButton upgradeButton = new TextButton("Upgrade ship "+ department.getProduct() + " for " + department.getUpgradeCost() + " gold", main.getSkin());
 
-        upgradeTable.add(upgradeText).padBottom(viewheight/40);
+        upgradeTable.add(upgradeText).padBottom(viewHeight/40);
         upgradeTable.row();
         upgradeTable.add(upgradeButton);
         // End of A4 change

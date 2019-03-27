@@ -131,7 +131,6 @@ public class SailingScreen extends BaseScreen {
         removeList = new ArrayList<BaseActor>();
         regionList = new ArrayList<BaseActor>();
 
-        // set up tile map, renderer and camera
         // A4: Changed map variables to initialise from tmx map files
         // set up Tiled Map and associated properties/attributes (width/height)
         tiledMap = new TmxMapLoader().load("assessment_four_map.tmx");
@@ -141,13 +140,14 @@ public class SailingScreen extends BaseScreen {
         tilePixelSize = mapProperties.get("tilewidth", Integer.class);
         mapPixelWidth = tilePixelSize * mapTileWidth;
         mapPixelHeight = tilePixelSize * mapTileHeight;
+        // End of A4 change
 
         // Setup renderer
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 
         // Setup camera
         tiledCamera = new OrthographicCamera();
-        tiledCamera.setToOrtho(false, viewwidth, viewheight);
+        tiledCamera.setToOrtho(false, viewWidth, viewHeight);
         tiledCamera.update();
 
         MapObjects objects = tiledMap.getLayers().get("ObjectData").getObjects();
@@ -338,8 +338,8 @@ public class SailingScreen extends BaseScreen {
         mainCamera.position.y = playerShip.getY() + playerShip.getOriginY();
 
         // bound camera to layout
-        mainCamera.position.x = MathUtils.clamp(mainCamera.position.x, viewwidth / 2, mapPixelWidth - viewwidth / 2);
-        mainCamera.position.y = MathUtils.clamp(mainCamera.position.y, viewheight / 2, mapPixelHeight - viewheight / 2);
+        mainCamera.position.x = MathUtils.clamp(mainCamera.position.x, viewWidth / 2, mapPixelWidth - viewWidth / 2);
+        mainCamera.position.y = MathUtils.clamp(mainCamera.position.y, viewHeight / 2, mapPixelHeight - viewHeight / 2);
         mainCamera.update();
 
         // adjust tilemap camera to stay in sync with main camera

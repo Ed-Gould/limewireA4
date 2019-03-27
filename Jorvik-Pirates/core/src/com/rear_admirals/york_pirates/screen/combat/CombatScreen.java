@@ -99,17 +99,17 @@ public class CombatScreen extends BaseScreen {
         combatStack = new Stack();
 
         // Sets size constants for the scene depending on viewport, also sets button padding constants for use in tables
-        button_pad_bottom = viewheight / 24f;
-        button_pad_right = viewwidth / 32f;
+        button_pad_bottom = viewHeight / 24f;
+        button_pad_right = viewWidth / 32f;
 
         // Insantiate the image textures for use within the scene as backgrounds.
         bg_texture = new Texture("water_texture_sky.png");
         background = new Image(bg_texture);
-        background.setSize(viewwidth, viewheight);
+        background.setSize(viewWidth, viewHeight);
 
         wood_texture = new Texture("wood_vertical_board_texture.png");
         background_wood = new Image(wood_texture);
-        background_wood.setSize(viewwidth, viewheight);
+        background_wood.setSize(viewWidth, viewHeight);
 
         // Create a Container which takes up the whole screen (used for layout purposes)
         tableContainer = new Container<Table>();
@@ -144,8 +144,8 @@ public class CombatScreen extends BaseScreen {
         //End Added
 
         // Instantiate both the ships for the battle
-        CombatShip myShip = new CombatShip("ship1.png", viewwidth / 3);
-        CombatShip enemyShip = new CombatShip("ship2.png", viewwidth / 3);
+        CombatShip myShip = new CombatShip("ship1.png", viewWidth / 3);
+        CombatShip enemyShip = new CombatShip("ship2.png", viewWidth / 3);
 
         Label shipName = new Label(player.getPlayerShip().getName(), pirateGame.getSkin(), "default_black");
         playerHP = new ProgressBar(0, player.getPlayerShip().getHealthMax(), 0.1f, false, pirateGame.getSkin());
@@ -166,11 +166,11 @@ public class CombatScreen extends BaseScreen {
         Table playerHPTable = new Table();
         Table enemyHPTable = new Table();
 
-        playerHPTable.add(playerHPLabel).padRight(viewwidth / 36f);
-        playerHPTable.add(playerHP).width(viewwidth / 5);
+        playerHPTable.add(playerHPLabel).padRight(viewWidth / 36f);
+        playerHPTable.add(playerHP).width(viewWidth / 5);
 
-        enemyHPTable.add(enemyHPLabel).padRight(viewwidth / 36f);
-        enemyHPTable.add(enemyHP).width(viewwidth / 5);
+        enemyHPTable.add(enemyHPLabel).padRight(viewWidth / 36f);
+        enemyHPTable.add(enemyHP).width(viewWidth / 5);
 
         Label screenTitle = new Label("Combat Mode", pirateGame.getSkin(), "title_black");
         screenTitle.setAlignment(Align.center);
@@ -214,18 +214,18 @@ public class CombatScreen extends BaseScreen {
         descriptionLabel.setAlignment(Align.center);
 
         descriptionTable.center();
-        descriptionTable.add(descriptionLabel).uniform().pad(0, button_pad_right, 0, button_pad_right).size(viewwidth / 2 - button_pad_right * 2, viewheight / 12).top();
+        descriptionTable.add(descriptionLabel).uniform().pad(0, button_pad_right, 0, button_pad_right).size(viewWidth / 2 - button_pad_right * 2, viewHeight / 12).top();
         descriptionTable.row();
         descriptionTable.add(fleeButton).uniform();
 
         attackTable.row();
-        attackTable.add(button1).uniform().width(viewwidth / 5).padRight(button_pad_right);
-        attackTable.add(button2).uniform().width(viewwidth / 5);
+        attackTable.add(button1).uniform().width(viewWidth / 5).padRight(button_pad_right);
+        attackTable.add(button2).uniform().width(viewWidth / 5);
         attackTable.row().padTop(button_pad_bottom);
-        attackTable.add(button3).uniform().width(viewwidth / 5).padRight(button_pad_right);
-        attackTable.add(button4).uniform().width(viewwidth / 5);
+        attackTable.add(button3).uniform().width(viewWidth / 5).padRight(button_pad_right);
+        attackTable.add(button4).uniform().width(viewWidth / 5);
 
-        rootTable.row().width(viewwidth * 0.8f);
+        rootTable.row().width(viewWidth * 0.8f);
         rootTable.add(screenTitle).colspan(2);
         rootTable.row();
         rootTable.add(shipName);
@@ -237,36 +237,36 @@ public class CombatScreen extends BaseScreen {
         rootTable.add(playerHPTable);
         rootTable.add(enemyHPTable);
         rootTable.row();
-        rootTable.add(textBox).colspan(2).fillX().height(viewheight / 9f).pad(viewheight / 12, 0, viewheight / 12, 0);
+        rootTable.add(textBox).colspan(2).fillX().height(viewHeight / 9f).pad(viewHeight / 12, 0, viewHeight / 12, 0);
         tableContainer.setActor(rootTable);
 
         completeAttackTable = new Table();
         completeAttackTable.setFillParent(true);
         completeAttackTable.align(Align.bottom);
-        completeAttackTable.row().expandX().padBottom(viewheight / 18f);
-        completeAttackTable.add(descriptionTable).width(viewwidth / 2);
-        completeAttackTable.add(attackTable).width(viewwidth / 2);
+        completeAttackTable.row().expandX().padBottom(viewHeight / 18f);
+        completeAttackTable.add(descriptionTable).width(viewWidth / 2);
+        completeAttackTable.add(attackTable).width(viewWidth / 2);
 
         //Added For Assessment 3
         playerStats.setFillParent(true);
         playerStats.align(Align.left);
-        playerStats.add(playerStatTitle).width(viewwidth);
+        playerStats.add(playerStatTitle).width(viewWidth);
         playerStats.row();
-        playerStats.add(playerAttack).width(viewwidth);
+        playerStats.add(playerAttack).width(viewWidth);
         playerStats.row();
-        playerStats.add(playerDefense).width(viewwidth);
+        playerStats.add(playerDefense).width(viewWidth);
         playerStats.row();
-        playerStats.add(playerAccuracy).width(viewwidth);
+        playerStats.add(playerAccuracy).width(viewWidth);
 
         enemyStats.setFillParent(true);
         enemyStats.align(Align.right);
-        enemyStats.add(enemyStatTitle).width(viewwidth / 9f);
+        enemyStats.add(enemyStatTitle).width(viewWidth / 9f);
         enemyStats.row();
-        enemyStats.add(enemyAttack).width(viewwidth / 9f);
+        enemyStats.add(enemyAttack).width(viewWidth / 9f);
         enemyStats.row();
-        enemyStats.add(enemyDefense).width(viewwidth / 9f);
+        enemyStats.add(enemyDefense).width(viewWidth / 9f);
         enemyStats.row();
-        enemyStats.add(enemyAccuracy).width(viewwidth / 9f);
+        enemyStats.add(enemyAccuracy).width(viewWidth / 9f);
         //End Added
 
 
@@ -290,7 +290,7 @@ public class CombatScreen extends BaseScreen {
 
         Gdx.input.setInputProcessor(uiStage);
 
-        System.out.println(viewwidth + "," + viewheight + " AND " + Gdx.graphics.getWidth() + "," + Gdx.graphics.getHeight());
+        System.out.println(viewWidth + "," + viewHeight + " AND " + Gdx.graphics.getWidth() + "," + Gdx.graphics.getHeight());
     }
 
     @Override

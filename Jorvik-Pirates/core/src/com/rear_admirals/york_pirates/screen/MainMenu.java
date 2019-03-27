@@ -3,6 +3,7 @@ package com.rear_admirals.york_pirates.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -49,6 +50,7 @@ public class MainMenu extends BaseScreen {
         TextButton combat_mode = new TextButton("Go to Combat Mode", pirateGame.getSkin());
         TextButton college_mode = new TextButton("Go to College screen", pirateGame.getSkin());
         TextButton department_mode = new TextButton("Go to Department screen", pirateGame.getSkin());
+        TextButton weather_mode = new TextButton("Go to Weather screen", pirateGame.getSkin());
         //Added For Assessment 3
         TextButton exit_game = new TextButton("Exit Game", pirateGame.getSkin());
         //End Added
@@ -88,6 +90,14 @@ public class MainMenu extends BaseScreen {
             }
         });
 
+        weather_mode.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y){
+                pirateGame.setScreen(new WeatherScreen(pirateGame));
+                dispose();
+            }
+        });
+
         //Added For Assessment 3
         exit_game.addListener(new ClickListener() {
             @Override
@@ -100,21 +110,21 @@ public class MainMenu extends BaseScreen {
 
         tableContainer.setActor(table);
 
-        table.add(title).padBottom(viewwidth / 20).width(viewwidth / 2);
+        table.add(title).padBottom(viewWidth / 20).width(viewWidth / 2);
         table.row(); // Ends the current row
-        table.add(sailing_mode).uniform().padBottom(viewheight / 40).size(viewwidth / 2, viewheight / 10);
+        table.add(sailing_mode).uniform().padBottom(viewHeight / 40).size(viewWidth / 2, viewHeight / 10);
         table.row();
         table.add(new Label("These are for demo purposes, to show implementation of combat and colleges.", pirateGame.getSkin()));
         table.row();
-        table.add(combat_mode).uniform().padBottom(viewheight / 40).fill();
+        table.add(combat_mode).uniform().padBottom(viewHeight / 40).fill();
         table.row();
-        table.add(college_mode).uniform().fill().padBottom(viewheight / 40);
+        table.add(college_mode).uniform().fill().padBottom(viewHeight / 40);
         table.row();
-        //Altered For Assessment 3
-        table.add(department_mode).uniform().fill().padBottom(viewheight / 40);
+        table.add(department_mode).uniform().fill().padBottom(viewHeight / 40);
         table.row();
-        table.add(exit_game).uniform().padBottom(viewheight / 40).size(viewwidth / 2, viewheight / 10);
-        //End Altered
+        table.add(weather_mode).uniform().fill().padBottom(viewHeight / 40);
+        table.row();
+        table.add(exit_game).uniform().padBottom(viewHeight / 40).size(viewWidth / 2, viewHeight / 10);
 
         stage.addActor(tableContainer);
 

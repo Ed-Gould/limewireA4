@@ -83,11 +83,11 @@ public class CollegeScreen extends BaseScreen {
         final Label healMessage = new Label("health status", main.getSkin());
         if (healthFromMax == 0) { healMessage.setText("Your ship is fully repaired."); }
 
-        healTable.add(healText).padBottom(viewheight/40);
+        healTable.add(healText).padBottom(viewHeight/40);
         healTable.row();
-        healTable.add(healFullBtn).padBottom(viewheight/40);
+        healTable.add(healFullBtn).padBottom(viewHeight/40);
         healTable.row();
-        healTable.add(healTenBtn).padBottom(viewheight/40);
+        healTable.add(healTenBtn).padBottom(viewHeight/40);
         healTable.row();
         healTable.add(healMessage);
         // End of A4 change
