@@ -93,7 +93,7 @@ public class MainMenu extends BaseScreen {
         weather_mode.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y){
-                pirateGame.setScreen(new WeatherScreen(pirateGame));
+                pirateGame.setScreen(new EventScreen(pirateGame));
                 dispose();
             }
         });

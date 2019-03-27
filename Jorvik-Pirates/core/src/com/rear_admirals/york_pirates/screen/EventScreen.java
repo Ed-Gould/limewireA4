@@ -25,8 +25,9 @@ import com.rear_admirals.york_pirates.screen.combat.CombatScreen;
 
 import java.util.ArrayList;
 
-public class WeatherScreen extends BaseScreen {
+public class EventScreen extends BaseScreen {
     private Ship playerShip;
+    private Monster monster;
 
     // Map Variables
     private ArrayList<BaseActor> obstacleList;
@@ -53,12 +54,14 @@ public class WeatherScreen extends BaseScreen {
 
     private  double timer;
 
-    public WeatherScreen(final PirateGame main){
+    public EventScreen(final PirateGame main){
         super(main);
 
         playerShip = main.getPlayer().getPlayerShip();
+        monster = new Monster("monster-2.png");
 
         mainStage.addActor(playerShip);
+        mainStage.addActor(monster);
 
         obstacleList = new ArrayList<BaseActor>();
         //removeList = new ArrayList<BaseActor>();
@@ -91,6 +94,8 @@ public class WeatherScreen extends BaseScreen {
 
             if (name.equals("player")) {
                 playerShip.setPosition(r.x, r.y);
+            } else if (name.equals("monster")) {
+                monster.setPosition(r.x, r.y);
             } else {
                 System.err.println("Unknown tilemap object: " + name);
             }
@@ -129,7 +134,10 @@ public class WeatherScreen extends BaseScreen {
     @Override
     public void update(float delta){
         //removeList.clear();
+        this.monster.updateSpeed(this.playerShip.getX());
+
         this.playerShip.playerMove(delta);
+        this.monster.move();
 
         for (BaseActor obstacle : obstacleList) {
             if (playerShip.overlaps(obstacle, true)) {
