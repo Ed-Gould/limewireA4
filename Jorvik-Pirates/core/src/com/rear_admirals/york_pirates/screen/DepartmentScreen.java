@@ -18,6 +18,7 @@ public class DepartmentScreen extends BaseScreen {
     private Label pointsValueLabel, pointsTextLabel;
     private Label goldValueLabel, goldTextLabel;
     private Label healthTextLabel, healthValueLabel;
+    private Label woodsTextLabel, woodsValueLabel;
 
     private int toHeal;
     private int healthFromMax;
@@ -51,11 +52,19 @@ public class DepartmentScreen extends BaseScreen {
         pointsValueLabel = new Label(Integer.toString(main.getPlayer().getPoints()), main.getSkin());
         pointsValueLabel.setAlignment(Align.left);
 
+        //A4: wood's lable
+        woodsTextLabel = new Label("Woods: ", main.getSkin());
+        woodsValueLabel = new Label(Integer.toString(main.getPlayer().getWoods()), main.getSkin());
+        woodsValueLabel.setAlignment(Align.left);
+
         uiTable.add(healthTextLabel).fill();
         uiTable.add(healthValueLabel).fill();
         uiTable.row();
         uiTable.add(goldTextLabel).fill();
         uiTable.add(goldValueLabel).fill();
+        uiTable.row();
+        uiTable.add(woodsTextLabel).fill();
+        uiTable.add(woodsValueLabel).fill();
         uiTable.row();
         uiTable.add(pointsTextLabel);
         uiTable.add(pointsValueLabel).width(pointsTextLabel.getWidth());
@@ -73,7 +82,7 @@ public class DepartmentScreen extends BaseScreen {
 
         // Create and align text and buttons for healing options
         Table healTable = new Table();
-        healTable.setX(viewWidth * -0.2f, Align.center);
+        healTable.setX(viewWidth * -0.3f, Align.center);
         healTable.setFillParent(true);
 
         final Label healText = new Label("Heal", main.getSkin(), "title");
@@ -92,7 +101,7 @@ public class DepartmentScreen extends BaseScreen {
 
         // Create buttons used to show upgrade options
         Table upgradeTable = new Table();
-        upgradeTable.setX(viewWidth * 0.2f, Align.center);
+        upgradeTable.setX(viewWidth * 0f, Align.center);
         upgradeTable.setFillParent(true);
 
         final Label upgradeText = new Label("Upgrade", main.getSkin(), "title");
@@ -101,6 +110,22 @@ public class DepartmentScreen extends BaseScreen {
         upgradeTable.add(upgradeText).padBottom(viewHeight/40);
         upgradeTable.row();
         upgradeTable.add(upgradeButton);
+        // End of A4 change
+
+        //A4: Create buttons used to but wood pieces
+        Table woodTable = new Table();
+        woodTable.setX(viewWidth * 0.3f, Align.center);
+        woodTable.setFillParent(true);
+
+        final Label woodText = new Label("Wood Pieces", main.getSkin(), "title");
+        final TextButton getWoodBtn = new TextButton("Get 10 wood pieces for 5 gold", main.getSkin());
+        final Label woodMessage = new Label("", main.getSkin());
+
+        woodTable.add(woodText).padBottom(viewHeight/40);
+        woodTable.row();
+        woodTable.add(getWoodBtn).padBottom(viewHeight/40);
+        woodTable.row();
+        woodTable.add(woodMessage);
         // End of A4 change
 
         upgradeButton.addListener(new ClickListener() {
@@ -156,10 +181,26 @@ public class DepartmentScreen extends BaseScreen {
             }
         });
 
+        // A4: Added function to buy wood pieces
+        getWoodBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(main.getPlayer().payGold(5)){
+                    System.out.println("add 10 wood pieces");
+                    main.getPlayer().addWood(10);
+                    woodMessage.setText("You purchased 10 wood pieces.");
+                }
+                else{
+                    woodMessage.setText("Not enough money to buy wood pieces.");
+                }
+            }
+            });
+
         // A4: Changed table to be more visually appealing
         mainStage.addActor(titleText);
         mainStage.addActor(healTable);
         mainStage.addActor(upgradeTable);
+        mainStage.addActor(woodTable);
         // End of A4 change
 
         Gdx.input.setInputProcessor(mainStage);
@@ -176,6 +217,7 @@ public class DepartmentScreen extends BaseScreen {
     }
     // End of A4 change
 
+
     @Override
     public void update(float delta) {
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
@@ -184,6 +226,7 @@ public class DepartmentScreen extends BaseScreen {
         }
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
+        woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
         healthFromMax = player.getPlayerShip().getHealthFromMax();
     }
 }

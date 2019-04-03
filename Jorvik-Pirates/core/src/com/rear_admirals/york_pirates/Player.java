@@ -13,6 +13,9 @@ public class Player {
     private Ship playerShip;
     private int gold;
     private int points;
+    //A4: parameters for new crew
+    private int woods;
+    private boolean engineer;
     public static List<Attack> attacks = new ArrayList<Attack>();
 
     public Player() {
@@ -21,6 +24,8 @@ public class Player {
         //End Altered
         this.gold = 1000;
         this.points = 0;
+        this.woods = 0;
+        this.engineer = false;
 
         attacks.add(Ram.attackRam);
         attacks.add(GrapeShot.attackSwivel);
@@ -53,6 +58,10 @@ public class Player {
         return gold;
     }
 
+    public int getWoods() { return  woods;}
+
+    public boolean isEngineer() {return engineer;}
+
     public void setPoints(int points) {
         this.points = points;
     }
@@ -61,11 +70,25 @@ public class Player {
         this.gold = gold;
     }
 
+    public void setWoods(int woods) { this.woods = woods;}
+
+    public void setEngineer(boolean engineer){this.engineer = engineer;}
+
     public boolean payGold(int value) {
         if (value > gold) {
             return false;
         } else {
             addGold(-value);
+            return true;
+        }
+    }
+
+    public boolean useWoods() {
+        if (10 > woods) {
+            return false;
+        } else {
+            addWood(-10);
+            playerShip.heal(50);
             return true;
         }
     }
@@ -77,4 +100,6 @@ public class Player {
     public void addGold(int value) {
         gold = gold + value;
     }
+
+    public void addWood(int value) { woods = woods + value;}
 }

@@ -60,6 +60,7 @@ public class SailingScreen extends BaseScreen {
     private Label healthValueLabel, healthTextLabel;
     private Label goldValueLabel, goldTextLabel;
     private Label pointsValueLabel, pointsTextLabel;
+    private Label woodsValueLabel, woodsTextLabel;
     // End of A4 change
 
     private Label mapMessage;
@@ -99,11 +100,18 @@ public class SailingScreen extends BaseScreen {
         pointsValueLabel = new Label(Integer.toString(main.getPlayer().getPoints()), main.getSkin(), "default_black");
         pointsValueLabel.setAlignment(Align.left);
 
+        woodsTextLabel = new Label("Woods: ", main.getSkin(), "default_black");
+        woodsValueLabel = new Label(Integer.toString(main.getPlayer().getWoods()), main.getSkin(), "default_black");
+        woodsValueLabel.setAlignment(Align.left);
+
         uiTable.add(healthTextLabel).fill();
         uiTable.add(healthValueLabel).fill();
         uiTable.row();
         uiTable.add(goldTextLabel).fill();
         uiTable.add(goldValueLabel).fill();
+        uiTable.row();
+        uiTable.add(woodsTextLabel).fill();
+        uiTable.add(woodsValueLabel).fill();
         uiTable.row();
         uiTable.add(pointsTextLabel);
         uiTable.add(pointsValueLabel).width(pointsTextLabel.getWidth());
@@ -362,6 +370,8 @@ public class SailingScreen extends BaseScreen {
         //End Altered
 
         pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
+        woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
+
     }
 
     @Override
