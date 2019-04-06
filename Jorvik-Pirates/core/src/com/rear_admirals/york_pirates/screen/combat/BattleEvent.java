@@ -13,6 +13,8 @@ public enum BattleEvent {
     ENEMY_DIES,
     // Players flee is successful
     PLAYER_FLEES,
+    //Players repair their ship during combat.(A4)
+    PLAYER_REPAIR,
     // Ends combat screen.
     SCENE_RETURN,
 }

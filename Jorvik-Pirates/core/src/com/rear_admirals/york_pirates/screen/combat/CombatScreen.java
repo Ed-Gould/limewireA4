@@ -52,6 +52,7 @@ public class CombatScreen extends BaseScreen {
     private Label playerAttack;
     private Label playerDefense;
     private Label playerAccuracy;
+    private Label playerWoods;
     private Label enemyStatTitle;
     private Label enemyAttack;
     private Label enemyDefense;
@@ -134,6 +135,10 @@ public class CombatScreen extends BaseScreen {
                 pirateGame.getSkin(), "default_black");
         playerAccuracy = new Label("Accuracy: " + Integer.toString(player.getPlayerShip().getAccuracy()),
                 pirateGame.getSkin(), "default_black");
+        //Add for A4
+        playerWoods = new Label("Woods: "+Integer.toString(player.getWoods()),
+                pirateGame.getSkin(), "default_black");
+
         enemyStatTitle = new Label("Enemy Stats: ", pirateGame.getSkin(), "default_black");
         enemyAttack = new Label("Attack: " + Integer.toString(enemy.getAttack()), pirateGame.getSkin(),
                 "default_black");
@@ -208,15 +213,20 @@ public class CombatScreen extends BaseScreen {
         buttonListener(button4);
         final AttackButton fleeButton = new AttackButton(Flee.attackFlee, pirateGame.getSkin(), "red");
         buttonListener(fleeButton);
+        final AttackButton repairButton = new AttackButton(Repair.attackRepair, pirateGame.getSkin());
+        RepairListener(repairButton);
+
 
         descriptionLabel = new Label("What would you like to do?", pirateGame.getSkin());
         descriptionLabel.setWrap(true);
         descriptionLabel.setAlignment(Align.center);
 
         descriptionTable.center();
-        descriptionTable.add(descriptionLabel).uniform().pad(0, button_pad_right, 0, button_pad_right).size(viewWidth / 2 - button_pad_right * 2, viewHeight / 12).top();
+        descriptionTable.add(descriptionLabel).uniform().pad(0, button_pad_right, 0, button_pad_right).size(viewWidth / 2 - button_pad_right * 2, viewHeight / 18).top();
         descriptionTable.row();
         descriptionTable.add(fleeButton).uniform();
+        descriptionTable.row();
+        descriptionTable.add(repairButton).uniform();
 
         attackTable.row();
         attackTable.add(button1).uniform().width(viewWidth / 5).padRight(button_pad_right);
@@ -257,6 +267,10 @@ public class CombatScreen extends BaseScreen {
         playerStats.add(playerDefense).width(viewWidth);
         playerStats.row();
         playerStats.add(playerAccuracy).width(viewWidth);
+        //Add for A4
+        playerStats.row();
+        playerStats.add(playerWoods).width(viewWidth);
+
 
         enemyStats.setFillParent(true);
         enemyStats.align(Align.right);
@@ -360,6 +374,10 @@ public class CombatScreen extends BaseScreen {
                         System.out.println("Flee Failed");
                         dialog("Flee failed.", BattleEvent.ENEMY_MOVE);
                     }
+                }else if (currentAttack.getName() == "REPAIR"){
+                    player.useWoods();
+                    System.out.println("Player repaired the ship.");
+                    dialog("Ship repaired.", BattleEvent.PLAYER_REPAIR);
                 } else {
                     int damage = currentAttack.doAttack(player.getPlayerShip(), enemy); // Calls the attack function
                     // on the player and stores damage output
@@ -451,6 +469,11 @@ public class CombatScreen extends BaseScreen {
                 player.addPoints(-5);
                 dialog("You Managed to Flee Successfully " + enemy.getName(), BattleEvent.SCENE_RETURN);
                 break;
+                //A4: Add repair case.
+            case PLAYER_REPAIR:
+                System.out.println("Player repaired 50hp and by use 10 wood pieces. Current HP: "+player.getPlayerShip().getHealth()+" Current Woods: "+player.getWoods());
+                dialog("You repaired 50hp and by use 10 wood pieces.", BattleEvent.ENEMY_MOVE);
+                break;
             case SCENE_RETURN:
                 enemy.setVisible(false);
                 player.getPlayerShip().setSpeed(0);
@@ -490,6 +513,41 @@ public class CombatScreen extends BaseScreen {
             public void clicked(InputEvent event, float x, float y) {
                 combatStack.push(button.getAttack());
                 combatHandler(BattleEvent.PLAYER_MOVE);
+            }
+        });
+    }
+
+    //A4: Repair button listener.
+    public void RepairListener(final AttackButton button){
+        button.addListener(new ClickListener() {
+            @Override
+            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
+                if(player.getWoods()>0){
+                    descriptionLabel.setText(button.getDesc());
+                }
+                else{
+                    descriptionLabel.setText("There is no enough wood to repair the ship.");
+                }
+            }
+
+            ;
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                descriptionLabel.setText("What would you like to do?");
+            }
+
+
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(player.getWoods()>0){
+                    combatStack.push(button.getAttack());
+                    combatHandler(BattleEvent.PLAYER_MOVE);
+                }
+                else{
+                    descriptionLabel.setText("There is no enough wood to repair the ship.");
+                }
+
             }
         });
     }
@@ -552,6 +610,9 @@ public class CombatScreen extends BaseScreen {
 
     // This method controls the animation of the dialog label
     public void labelAnimationUpdate(float dt) {
+        //A4: wood pieces number update
+        playerWoods .setText("Woods: "+Integer.toString(player.getWoods()));
+        //End of A4 changes.
         if (textAnimation) {
             delayTime += dt;
 

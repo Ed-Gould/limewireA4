@@ -52,10 +52,11 @@ public class DepartmentScreen extends BaseScreen {
         pointsValueLabel = new Label(Integer.toString(main.getPlayer().getPoints()), main.getSkin());
         pointsValueLabel.setAlignment(Align.left);
 
-        //A4: wood's lable
+        //A4: wood's label
         woodsTextLabel = new Label("Woods: ", main.getSkin());
         woodsValueLabel = new Label(Integer.toString(main.getPlayer().getWoods()), main.getSkin());
         woodsValueLabel.setAlignment(Align.left);
+        //End of A4 change
 
         uiTable.add(healthTextLabel).fill();
         uiTable.add(healthValueLabel).fill();
