@@ -121,11 +121,19 @@ public class DepartmentScreen extends BaseScreen {
         final TextButton getWoodBtn = new TextButton("Get 10 wood pieces for 10 gold", main.getSkin());
         final Label woodMessage = new Label("", main.getSkin());
 
+        final Label minigame = new Label("Mini Game", main.getSkin(), "title");
+        final TextButton playerMinigame = new TextButton("Play Minigame", main.getSkin());
+
+
         woodTable.add(woodText).padBottom(viewHeight/40);
         woodTable.row();
         woodTable.add(getWoodBtn).padBottom(viewHeight/40);
         woodTable.row();
         woodTable.add(woodMessage);
+        woodTable.row();
+        woodTable.add(minigame).padBottom(viewHeight/40);
+        woodTable.row();
+        woodTable.add(playerMinigame).padBottom(viewHeight/40);
         // End of A4 change
 
         upgradeButton.addListener(new ClickListener() {
@@ -172,7 +180,7 @@ public class DepartmentScreen extends BaseScreen {
         });
         // End of A4 change
 
-        final TextButton playerMinigame = new TextButton("Play Minigame", main.getSkin());
+
         playerMinigame.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

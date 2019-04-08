@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.2" orientation="orthogonal" renderorder="right-down" width="78" height="52" tilewidth="64" tileheight="64" infinite="0" nextlayerid="37" nextobjectid="911">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="78" height="52" tilewidth="64" tileheight="64" infinite="0" nextlayerid="37" nextobjectid="911">
  <tileset firstgid="1" source="rpg-tiles-64.tsx"/>
  <tileset firstgid="261" source="map-tiles-64.tsx"/>
  <layer id="32" name="Water" width="78" height="52">
@@ -9,7 +9,7 @@
  </layer>
  <layer id="33" name="Background" width="78" height="52">
   <data encoding="base64" compression="zlib">
-   eJzt2sESgjAMhGF4CS++/3s6HjzRCs0m6abdf4aTzhA+FTrCcSilvHud161q77O9edbymm2HzNAz83a8c8u2Q2cYcbPaPTFjcXs6x6ibxY7NzWMOFrfs0Hky3Dzm9A6Zx2KGXB9YzO7mYXNjjPk3yp7c7DGu31as5yI3rGwzfV7jeZwreq+vaO95jm29Z8XvrPcacofrmtUMcVvBztttl7XULLfqdohb69h3cfslNyyd37CQY9/Z7ZvcsEaPW2a25GZPTkopSwz3PavFdM+4Smz32qvE9GxHZJ5rmMhnYpjWqd77jnBj+88nYt/ebiNmcvs/30y7qH3P/K5l2EXtn8Esyi16Brnln3OZZ2T8LJE5M6ti15t5ZtXcGJMVlqyU8ukD8dRY1g==
+   eJztmttuEzEQhtcX4ZCWywjYbiVuCmETLqFtGm6hPACl8P4Pgi084s/E3oPttbOuf2m0OUmxP8/4MJ6qKioqCq2FqKpnYM9F6ha5aynbfi7tTJt6/Spwf4jXW2n30n5oe5OQ3cJj/BSzW2mNtI1+KrthLH05roAVckvFbqHHkNoztg215rSVdgHPC8byxoMdtpHaydm9jsiNM3Nh1wInZIbv6enKbtXBS9kLaR8icruS//XS4P/3I8avNfCymfK9S4f+UTs5N3od09dIK0t7hvpcDT61MXDi7z859hHHGMc3tq/Z2oP8+saR1oQ+XuSPjaO/YVt/Svsl7be094mYYXt4vA4Zx1azGBKjytbSvibs5xTCOWTonFGLYz/biEOf24C/ucboqYvYDZ0zdvI3H0esCz4xeuq6Gjln0P6t0XF4J+3RwLPJ2N9cpHzuQbPCuUt9/kfzI6a5zW1TivjFYsbPyiHOeLmL9kV8XqWz8pB8wzfL99cZsld9Vf3i67vL2rQ0sP0s33/JjNsS4tHkaybf6/K5Wv/mzGC5xLstLn18Ds+NeM7ZDmA+Fw2JyzHc+sYhl71UaG6YSzSdd3xyYacktcfZi397xDHcbH1v2e94foLiN5dzj+L3OIKfbQ/eWlghwxz373R26eNnm6N24n9+h8fnUzhj73rYdc3tuJ5yX9tmsi50SbG7s/DrirMamPGYzTFGbaLz8V4c5x5MMuViiV/OMeorzCmuRzJ/6qIYL5yKiorGiGp45lx/FVtYj5Ky/mpOImZYE5CirmNuwjoUshx9jvLPIXJN6Gu8hs3X56id54Zn7DwZ1lCGOFtgrWQobsTrVhzfb6fIMfJccYj/Ds1tCbxMtYpYrxjrTGk61/rmTmhu48xcateQmSkXi7kLuu/+PjE77muUZ/f1OdOa4FrvZ6rvtNU+qXvVd5X5TjSkKPdkqp2kO0WX/+d1pr7xiXXYOL4Yo5eambozrgPETF+bpqptVuxUnaSql3Stk+S163w+4+NMa+pOTJfboHkN/cxWb4ptiinMjXFe+Jma2/YiTj2PLSdvyhkjv9j3/5S/fRCHd4CYY4ydNyN2Q3wO90sp72LpDjB1jpFynbY7jQaeFA8lN3oovM8lXmsdIzFrAecq4ldYFRX56S/Rs4ER
   </data>
  </layer>
  <layer id="34" name="Buildings" width="78" height="52">
@@ -37,7 +37,7 @@
   <object id="740" name="langwithregion" x="3328" y="2176" width="1472" height="1152"/>
   <object id="742" name="goodrickeregion" x="3648" y="832" width="1344" height="1152"/>
  </objectgroup>
- <objectgroup id="6" name="PhysicsData">
+ <objectgroup id="6" name="PhysicsData" locked="1">
   <object id="15" name="bound" x="0" y="0" width="4992" height="5"/>
   <object id="16" name="bound" x="0" y="0" width="5" height="3328"/>
   <object id="18" name="bound" x="0" y="3323" width="4992" height="5"/>
@@ -64,7 +64,7 @@
   <object id="860" name="maths" x="1344" y="512" width="64" height="192"/>
   <object id="861" name="maths" x="1024" y="640" width="64" height="128"/>
   <object id="862" name="maths" x="960" y="640" width="64" height="64"/>
-  <object id="863" name="maths" x="832" y="448" width="64" height="64"/>
+  <object id="863" name="maths" x="832" y="385" width="64" height="127"/>
   <object id="864" name="maths" x="960" y="256" width="256" height="64"/>
   <object id="865" name="maths" x="1152" y="832" width="128" height="64"/>
   <object id="866" name="vanbrugh" x="1728" y="2880" width="320" height="192"/>
@@ -110,6 +110,6 @@
   <object id="906" name="james" x="256" y="1152" width="128" height="64"/>
   <object id="907" name="james" x="576" y="1152" width="128" height="64"/>
   <object id="908" name="james" x="256" y="1088" width="64" height="64"/>
-  <object id="910" name="james" x="646" y="1084" width="64" height="64"/>
+  <object id="910" name="james" x="640" y="1088.67" width="64" height="64"/>
  </objectgroup>
 </map>
