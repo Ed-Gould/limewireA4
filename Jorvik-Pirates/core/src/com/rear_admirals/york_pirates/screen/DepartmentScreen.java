@@ -20,7 +20,6 @@ public class DepartmentScreen extends BaseScreen {
     private Label healthTextLabel, healthValueLabel;
     private Label woodsTextLabel, woodsValueLabel;
 
-    private int toHeal;
     private int healthFromMax;
 
     public DepartmentScreen(final PirateGame main, final Department department) {
@@ -119,7 +118,7 @@ public class DepartmentScreen extends BaseScreen {
         woodTable.setFillParent(true);
 
         final Label woodText = new Label("Wood Pieces", main.getSkin(), "title");
-        final TextButton getWoodBtn = new TextButton("Get 10 wood pieces for 5 gold", main.getSkin());
+        final TextButton getWoodBtn = new TextButton("Get 10 wood pieces for 10 gold", main.getSkin());
         final Label woodMessage = new Label("", main.getSkin());
 
         woodTable.add(woodText).padBottom(viewHeight/40);
@@ -141,7 +140,7 @@ public class DepartmentScreen extends BaseScreen {
         healFullBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (toHeal == 0) {
+                if (healthFromMax == 0) {
                     healMessage.setText("Your ship is already fully repaired!");
                 } else {
                     if (player.payGold(getHealCost(healthFromMax))) {
@@ -158,7 +157,7 @@ public class DepartmentScreen extends BaseScreen {
         healTenBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (toHeal == 0) {
+                if (healthFromMax == 0) {
                     healMessage.setText("Your ship is already fully repaired!");
                 } else {
                     if (player.payGold(getHealCost(10))) {
@@ -186,7 +185,7 @@ public class DepartmentScreen extends BaseScreen {
         getWoodBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(main.getPlayer().payGold(5)){
+                if(main.getPlayer().payGold(10)){
                     System.out.println("add 10 wood pieces");
                     main.getPlayer().addWood(10);
                     woodMessage.setText("You purchased 10 wood pieces.");
@@ -228,6 +227,7 @@ public class DepartmentScreen extends BaseScreen {
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
         woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
+        healthValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPlayerShip().getHealth()));
         healthFromMax = player.getPlayerShip().getHealthFromMax();
     }
 }

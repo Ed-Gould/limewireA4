@@ -370,6 +370,7 @@ public class SailingScreen extends BaseScreen {
         //End Altered
 
         pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
+        healthValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPlayerShip().getHealth()));
         woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
 
     }

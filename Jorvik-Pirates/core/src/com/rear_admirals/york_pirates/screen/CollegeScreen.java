@@ -19,8 +19,8 @@ public class CollegeScreen extends BaseScreen {
     private Label pointsValueLabel, pointsTextLabel;
     private Label goldValueLabel, goldTextLabel;
     private Label healthTextLabel, healthValueLabel;
+    private Label woodsTextLabel, woodsValueLabel;
 
-    private int toHeal;
     private int healthFromMax;
 
     public CollegeScreen(PirateGame main, College college) {
@@ -52,11 +52,20 @@ public class CollegeScreen extends BaseScreen {
         pointsValueLabel = new Label(Integer.toString(main.getPlayer().getPoints()), main.getSkin());
         pointsValueLabel.setAlignment(Align.left);
 
+        //A4: wood's label
+        woodsTextLabel = new Label("Woods: ", main.getSkin());
+        woodsValueLabel = new Label(Integer.toString(main.getPlayer().getWoods()), main.getSkin());
+        woodsValueLabel.setAlignment(Align.left);
+        //End of A4 change
+
         uiTable.add(healthTextLabel).fill();
         uiTable.add(healthValueLabel).fill();
         uiTable.row();
         uiTable.add(goldTextLabel).fill();
         uiTable.add(goldValueLabel).fill();
+        uiTable.row();
+        uiTable.add(woodsTextLabel).fill();
+        uiTable.add(woodsValueLabel).fill();
         uiTable.row();
         uiTable.add(pointsTextLabel);
         uiTable.add(pointsValueLabel).width(pointsTextLabel.getWidth());
@@ -92,11 +101,27 @@ public class CollegeScreen extends BaseScreen {
         healTable.add(healMessage);
         // End of A4 change
 
+        //A4: Create buttons used to but wood pieces
+        Table woodTable = new Table();
+        woodTable.setX(viewWidth * 0.3f, Align.center);
+        woodTable.setFillParent(true);
+
+        final Label woodText = new Label("Wood Pieces", main.getSkin(), "title");
+        final TextButton getWoodBtn = new TextButton("Get 10 wood pieces for 10 gold", main.getSkin());
+        final Label woodMessage = new Label("", main.getSkin());
+
+        woodTable.add(woodText).padBottom(viewHeight/40);
+        woodTable.row();
+        woodTable.add(getWoodBtn).padBottom(viewHeight/40);
+        woodTable.row();
+        woodTable.add(woodMessage);
+        // End of A4 change
+
         // A4: Added new buttons to allow for more healing options
         healFullBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (toHeal == 0) {
+                if (healthFromMax == 0) {
                     healMessage.setText("Your ship is already fully repaired!");
                 } else {
                     if (player.payGold(getHealCost(healthFromMax))) {
@@ -113,7 +138,7 @@ public class CollegeScreen extends BaseScreen {
         healTenBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if (toHeal == 0) {
+                if (healthFromMax == 0) {
                     healMessage.setText("Your ship is already fully repaired!");
                 } else {
                     if (player.payGold(getHealCost(10))) {
@@ -128,9 +153,25 @@ public class CollegeScreen extends BaseScreen {
         });
         // End of A4 change
 
+        // A4: Added function to buy wood pieces
+        getWoodBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(player.payGold(10)){
+                    System.out.println("add 10 wood pieces");
+                    player.addWood(10);
+                    woodMessage.setText("You purchased 10 wood pieces.");
+                }
+                else{
+                    woodMessage.setText("Not enough money to buy wood pieces.");
+                }
+            }
+        });
+
         // A4: Changed table to be more visually appealing
         mainStage.addActor(titleText);
         mainStage.addActor(healTable);
+        mainStage.addActor(woodTable);
         // End of A4 change
 
         Gdx.input.setInputProcessor(mainStage);
@@ -157,5 +198,6 @@ public class CollegeScreen extends BaseScreen {
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         pointsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPoints()));
         healthFromMax = player.getPlayerShip().getHealthFromMax();
+        woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
     }
 }

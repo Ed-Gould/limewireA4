@@ -225,8 +225,11 @@ public class CombatScreen extends BaseScreen {
         descriptionTable.add(descriptionLabel).uniform().pad(0, button_pad_right, 0, button_pad_right).size(viewWidth / 2 - button_pad_right * 2, viewHeight / 18).top();
         descriptionTable.row();
         descriptionTable.add(fleeButton).uniform();
-        descriptionTable.row();
-        descriptionTable.add(repairButton).uniform();
+        //A4: if player have new crew, show the repair button.
+        if(player.isEngineer()){
+            descriptionTable.row();
+            descriptionTable.add(repairButton).uniform();
+        }
 
         attackTable.row();
         attackTable.add(button1).uniform().width(viewWidth / 5).padRight(button_pad_right);
@@ -459,7 +462,16 @@ public class CombatScreen extends BaseScreen {
                 if (enemy.getIsBoss() == true) {
                     enemy.getCollege().setBossDead(true);
                     this.player.getPlayerShip().getCollege().addAlly(this.enemy.getCollege());
-                    dialog("Congratulations, you have defeated Enemy " + enemy.getName(), BattleEvent.SCENE_RETURN);
+                    this.player.addCollegeDefeated();
+                    if(this.player.getCollegeDefeated() == 2){
+                        this.player.setEngineer(true);
+                        dialog("Congratulations, you have defeated Enemy " + enemy.getName()
+                                        +".\nSome engineers lived in "+enemy.getCollege().getName()+" decided to join you,\nyou now have the ability to repair your ship with wood pieces during combat.",
+                                BattleEvent.SCENE_RETURN);
+                    }
+                    else {
+                        dialog("Congratulations, you have defeated Enemy " + enemy.getName(), BattleEvent.SCENE_RETURN);
+                    }
                 } else {
                     dialog("Congratulations, you have defeated Enemy " + enemy.getName(), BattleEvent.SCENE_RETURN);
                 }

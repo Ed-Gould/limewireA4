@@ -16,6 +16,7 @@ public class Player {
     //A4: parameters for new crew
     private int woods;
     private boolean engineer;
+    private int collegeDefeated;
     public static List<Attack> attacks = new ArrayList<Attack>();
 
     public Player() {
@@ -26,6 +27,9 @@ public class Player {
         this.points = 0;
         this.woods = 0;
         this.engineer = false;
+        // this.collegeDefeated = 0;
+        //A4: testing number for college defeated.
+        this.collegeDefeated = 1;
 
         attacks.add(Ram.attackRam);
         attacks.add(GrapeShot.attackSwivel);
@@ -59,6 +63,8 @@ public class Player {
     }
 
     public int getWoods() { return  woods;}
+
+    public int getCollegeDefeated() { return collegeDefeated;}
 
     public boolean isEngineer() {return engineer;}
 
@@ -102,4 +108,6 @@ public class Player {
     }
 
     public void addWood(int value) { woods = woods + value;}
+
+    public void addCollegeDefeated() {collegeDefeated = collegeDefeated + 1;}
 }
