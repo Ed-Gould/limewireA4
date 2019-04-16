@@ -139,6 +139,10 @@ public class EventScreen extends BaseScreen {
         this.playerShip.playerMove(delta);
         this.monster.move();
 
+        if (playerShip.overlaps(monster, false)){
+            System.out.println("Dead!");
+        }
+
         for (BaseActor obstacle : obstacleList) {
             if (playerShip.overlaps(obstacle, true)) {
                 // Obstacle must be a college if college not null

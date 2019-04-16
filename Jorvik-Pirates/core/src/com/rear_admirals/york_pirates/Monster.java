@@ -35,7 +35,6 @@ public class Monster extends PhysicsActor {
         if (distanceToShip(shipX) > 1500) this.setMaxSpeed(maxSpeed);
         else if (distanceToShip(shipX) < 500) this.setMaxSpeed(minSpeed);
         else this.setMaxSpeed(distanceToShip(shipX) * 0.45f);
-        System.out.println(distanceToShip(shipX));
     }
 
     public float distanceToShip(float shipX){
