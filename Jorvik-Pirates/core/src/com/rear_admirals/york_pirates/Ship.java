@@ -130,7 +130,7 @@ public class Ship extends PhysicsActor {
     }
 
     public void playerMove(float dt) {
-        this.setAccelerationXY(0, 0);
+            this.setAccelerationXY(0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
             this.rotateBy(90 * dt);
         }
