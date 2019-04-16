@@ -373,6 +373,12 @@ public class SailingScreen extends BaseScreen {
         healthValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPlayerShip().getHealth()));
         woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
 
+        //MapScreen Testing
+        if (Gdx.input.isKeyPressed(Input.Keys.M)) {
+            System.out.println("Map");
+            pirateGame.setScreen(new MapScreen(pirateGame));
+        }
+
     }
 
     @Override
