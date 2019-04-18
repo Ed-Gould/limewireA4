@@ -79,7 +79,7 @@ public class EventScreen extends BaseScreen {
         super(main);
 
         playerShip = main.getPlayer().getPlayerShip();
-        monster = new Monster("monster-2.png");
+        monster = new Monster("monster-4.png");
 
         mainStage.addActor(playerShip);
         mainStage.addActor(monster);
