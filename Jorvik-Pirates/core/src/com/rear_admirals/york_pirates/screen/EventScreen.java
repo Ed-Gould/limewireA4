@@ -38,6 +38,9 @@ import com.rear_admirals.york_pirates.screen.combat.CombatScreen;
 import javax.xml.soap.Text;
 import java.util.ArrayList;
 
+import static com.rear_admirals.york_pirates.College.Derwent;
+import static com.rear_admirals.york_pirates.ShipType.Player;
+
 public class EventScreen extends BaseScreen {
     private Ship playerShip;
     private Monster monster;
@@ -78,7 +81,7 @@ public class EventScreen extends BaseScreen {
     public EventScreen(final PirateGame main){
         super(main);
 
-        playerShip = main.getPlayer().getPlayerShip();
+        playerShip = new Ship(Player, "Event Ship", Derwent);;
         monster = new Monster("monster-4.png");
 
         mainStage.addActor(playerShip);
@@ -147,6 +150,11 @@ public class EventScreen extends BaseScreen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Win button clicked");
+
+//                System.out.println(playerShip.getX()+" "+playerShip.getY());
+//                playerShip.setX(2560);
+//                playerShip.setY(1729);
+
                 pirateGame.setScreen(pirateGame.getSailingScene());
                 dispose();
                 return true;
