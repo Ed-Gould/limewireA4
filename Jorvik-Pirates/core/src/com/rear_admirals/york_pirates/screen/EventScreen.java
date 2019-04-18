@@ -7,6 +7,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.MapProperties;
@@ -16,13 +19,23 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.TimeUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.rear_admirals.york_pirates.*;
 import com.rear_admirals.york_pirates.base.BaseActor;
 import com.rear_admirals.york_pirates.base.BaseScreen;
 import com.rear_admirals.york_pirates.screen.combat.CombatScreen;
 
+import javax.xml.soap.Text;
 import java.util.ArrayList;
 
 public class EventScreen extends BaseScreen {
@@ -46,13 +59,21 @@ public class EventScreen extends BaseScreen {
     private final int mapPixelWidth;
     private final int mapPixelHeight;
 
-
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private OrthographicCamera tiledCamera;
     private int[] backgroundLayers = {0, 1, 2};
     private int[] foregroundLayers = {3};
 
-    private  double timer;
+    private double timer;
+
+    private SpriteBatch eventMsgBatch;
+    private Texture eventMsgBox = new Texture(Gdx.files.internal("eventMsgBox.png"));
+    private boolean startMsgAcknoledged = false;
+    private boolean endReached = false;
+
+    private Table startTable, winTable;
+    private Label eventStartLabel, eventLostLabel, eventWinLabel;
+    private TextButton eventStartButton, eventWinButton;
 
     public EventScreen(final PirateGame main){
         super(main);
@@ -83,6 +104,58 @@ public class EventScreen extends BaseScreen {
         tiledCamera = new OrthographicCamera();
         tiledCamera.setToOrtho(false, viewWidth, viewHeight);
         tiledCamera.update();
+
+        // Create event start Table
+        startTable = new Table();
+
+        eventStartLabel = new Label("A sea monster has attacked your ship, navigate through the obstacles to escape!",
+                main.getSkin(), "default_black");
+        eventStartButton = new TextButton("Start", main.getSkin());
+
+        startTable.add(eventStartLabel).fill().padBottom(viewHeight/40);
+        startTable.row();
+        startTable.add(eventStartButton);
+        startTable.align(Align.center);
+        startTable.setFillParent(true);
+
+        eventStartButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Start button clicked");
+                startMsgAcknoledged = true;
+            }
+        });
+
+        eventLostLabel = new Label("The sea monster caught you and damage your ship! You lost some gold and wood.",
+                main.getSkin(), "default_black");
+
+
+        // Create event win Table
+        winTable = new Table();
+
+        eventWinLabel = new Label("You successfully escaped the sea monster!",
+                main.getSkin(), "default_black");
+        eventWinButton = new TextButton("Return to sailing", main.getSkin());
+
+        winTable.add(eventWinLabel).fill().padBottom(viewHeight/40);
+        winTable.row();
+        winTable.add(eventWinButton);
+        winTable.align(Align.center);
+        winTable.setFillParent(true);
+
+        eventWinButton.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Win button clicked");
+                pirateGame.setScreen(pirateGame.getSailingScene());
+                dispose();
+                return true;
+            }
+
+        });
+
+        eventMsgBatch = new SpriteBatch();
+
 
         MapObjects objects = tiledMap.getLayers().get("ObjectData").getObjects();
         for (MapObject object : objects) {
@@ -126,6 +199,8 @@ public class EventScreen extends BaseScreen {
         }
 
         timer = 0f;
+        playerShip.setX(7650);
+        uiStage.addActor(startTable);
 
         InputMultiplexer im = new InputMultiplexer(uiStage, mainStage);
         Gdx.input.setInputProcessor(im);
@@ -134,10 +209,22 @@ public class EventScreen extends BaseScreen {
     @Override
     public void update(float delta){
         //removeList.clear();
-        this.monster.updateSpeed(this.playerShip.getX());
 
-        this.playerShip.playerMove(delta);
-        this.monster.move();
+        if (startMsgAcknoledged && !isEndReached()){
+            this.monster.updateSpeed(this.playerShip.getX());
+            this.playerShip.playerMove(delta);
+            this.monster.move();
+        }
+
+        if (isEndReached()){
+            // Stop monster and player from moving when end is reached
+            this.monster.setSpeed(0);
+            this.monster.setAccelerationXY(0,0);
+            this.playerShip.setSpeed(0);
+
+            uiStage.clear();
+            uiStage.addActor(winTable);
+        }
 
         if (playerShip.overlaps(monster, false)){
             System.out.println("Dead!");
@@ -185,7 +272,6 @@ public class EventScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         uiStage.act(delta);
-
         mainStage.act(delta);
         update(delta);
 
@@ -197,21 +283,22 @@ public class EventScreen extends BaseScreen {
 
         tiledMapRenderer.render(foregroundLayers);
 
-        uiStage.draw();
-
-        if (!playerShip.isAnchor()) {
-            playerShip.addAccelerationAS(playerShip.getRotation(), 10000);
-        } else {
-            playerShip.setAccelerationXY(0, 0);
-            playerShip.setDeceleration(500);
+        if (!startMsgAcknoledged || isEndReached()){
+            eventMsgBatch.begin();
+            eventMsgBatch.draw(eventMsgBox, Gdx.graphics.getWidth() / 2 - eventMsgBox.getWidth() / 2,
+                    Gdx.graphics.getHeight() / 2 - eventMsgBox.getHeight() / 2);
+            eventMsgBatch.end();
+            uiStage.draw();
         }
-    }
 
-    @Override
-    public void dispose() {
-        mainStage.dispose();
-        uiStage.dispose();
-        playerShip.getSailingTexture().dispose();
+        if (!endReached){
+            if (!playerShip.isAnchor()) {
+                playerShip.addAccelerationAS(playerShip.getRotation(), 10000);
+            } else {
+                playerShip.setAccelerationXY(0, 0);
+                playerShip.setDeceleration(500);
+            }
+        }
     }
 
     public String capitalizeFirstLetter(String original) {
@@ -219,6 +306,11 @@ public class EventScreen extends BaseScreen {
             return original;
         }
         return original.substring(0, 1).toUpperCase() + original.substring(1);
+    }
+
+    public boolean isEndReached(){
+        //7960 is the x coordinate for the end of the obstacles
+        return this.playerShip.getX() > 7960;
     }
 }
 
