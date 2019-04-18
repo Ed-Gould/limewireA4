@@ -39,22 +39,19 @@ public class MapScreen extends BaseScreen {
         bgImage.setWidth(mainStage.getWidth());
         bgImage.setHeight(mainStage.getHeight());
 
-        shipImage.setWidth(mainStage.getWidth()/40);
-        shipImage.setHeight(mainStage.getWidth()/40);
+        shipImage.setWidth(mainStage.getWidth()/25);
+        shipImage.setHeight(mainStage.getWidth()/25);
         shipImage.setX(player.getPlayerShip().getX()/scalX);
         shipImage.setY(player.getPlayerShip().getY()/scalY);
 
         mainStage.addActor(bgImage);
         mainStage.addActor(shipImage);
         Gdx.input.setInputProcessor(mainStage);
-
-
-
     }
         @Override
     public void update(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            System.out.println("ESCAPE");
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            System.out.println("Map closed");
             pirateGame.setScreen(pirateGame.getSailingScene());
             dispose();
         }
