@@ -39,8 +39,8 @@ public class MapScreen extends BaseScreen {
         bgImage.setWidth(mainStage.getWidth());
         bgImage.setHeight(mainStage.getHeight());
 
-        shipImage.setWidth(mainStage.getWidth()/40);
-        shipImage.setHeight(mainStage.getWidth()/40);
+        shipImage.setWidth(mainStage.getWidth()/20);
+        shipImage.setHeight(mainStage.getWidth()/20);
         shipImage.setX(player.getPlayerShip().getX()/scalX);
         shipImage.setY(player.getPlayerShip().getY()/scalY);
 

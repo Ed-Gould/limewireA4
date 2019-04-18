@@ -255,7 +255,7 @@ public class SailingScreen extends BaseScreen {
             //If in a colleges territory
             if (playerShip.overlaps(region, false) && !(region.getName().contains("chemistry") || region.getName().contains("physics") || region.getName().contains("maths"))) {
                 x = true;
-                mapMessage.setText(capitalizeFirstLetter(name.substring(0, name.length() - 6)) + " Territory");
+                mapMessage.setText(capitalizeFirstLetter(name.substring(0, name.length() - 6)) + " Territory\nPress M to open the map");
 
                 //Roll a random chance to see if you are meeting an enemy ship
                 int roll = ThreadLocalRandom.current().nextInt(0, 10001);
@@ -279,7 +279,7 @@ public class SailingScreen extends BaseScreen {
         }
 
         if (!x) {
-            mapMessage.setText("Neutral Territory");
+            mapMessage.setText("Neutral Territory\nPress M to open the map");
         }
 
 
