@@ -20,9 +20,18 @@ public class SailingMonster extends PhysicsActor {
         this.setOrigin(Align.topLeft);
         this.setEllipseBoundary();
         this.setAnchor(false);
+        this.setMaxSpeed(speed);
     }
 
-    //public void move() {
+    public void move() {
+        this.setAccelerationXY(0, 0);
+        this.addAccelerationAS(this.getRotation(), 10000);
+        this.setAnchor(false);
+    }
+
+    public void reverseVelocity(){
+        this.rotateBy(180);
+    }
 
     @Override
     public void draw(Batch batch, float alpha) {

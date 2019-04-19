@@ -254,6 +254,7 @@ public class SailingScreen extends BaseScreen {
         removeList.clear();
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         this.playerShip.playerMove(delta);
+        this.sailingMonster.move();
 
         if (this.playerShip.overlaps(sailingMonster, false)){
             pirateGame.setScreen(new EventScreen(pirateGame));
@@ -343,6 +344,10 @@ public class SailingScreen extends BaseScreen {
                 } else {
 //                    System.out.println("Pure obstacle");
                 }
+            }
+            System.out.println(playerShip.getSpeed());
+            if (sailingMonster.overlaps(obstacle, true)) {
+                // Todo: Add logic to turn monster around when colliding with land
             }
         }
 
