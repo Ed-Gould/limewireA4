@@ -219,7 +219,6 @@ public class EventScreen extends BaseScreen {
         }
 
         timer = 0f;
-        playerShip.setX(7650);
         uiStage.addActor(startTable);
 
         InputMultiplexer im = new InputMultiplexer(uiStage, mainStage);
@@ -230,7 +229,7 @@ public class EventScreen extends BaseScreen {
     public void update(float delta){
         //removeList.clear();
 
-        if (startMsgAcknoledged && !isEndReached()){
+        if (startMsgAcknoledged && !isEndReached() && !isEventLost){
             this.monster.updateSpeed(this.playerShip.getX());
             this.playerShip.playerMove(delta);
             this.monster.move();
@@ -317,7 +316,7 @@ public class EventScreen extends BaseScreen {
             uiStage.draw();
         }
 
-        if (!isEndReached()){
+        if (!isEndReached() && !isEventLost){
             if (!playerShip.isAnchor()) {
                 playerShip.addAccelerationAS(playerShip.getRotation(), 10000);
             } else {
