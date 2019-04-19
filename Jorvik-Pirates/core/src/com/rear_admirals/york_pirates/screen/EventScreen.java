@@ -72,11 +72,11 @@ public class EventScreen extends BaseScreen {
     private SpriteBatch eventMsgBatch;
     private Texture eventMsgBox = new Texture(Gdx.files.internal("eventMsgBox.png"));
     private boolean startMsgAcknoledged = false;
-    private boolean endReached = false;
+    private boolean isEventLost = false;
 
-    private Table startTable, winTable;
-    private Label eventStartLabel, eventLostLabel, eventWinLabel;
-    private TextButton eventStartButton, eventWinButton;
+    private Table startTable, winTable, lostTable;
+    private Label eventStartLabel, eventWinLabel, eventLostLabel;
+    private TextButton eventStartButton, eventWinButton, eventLostButton;
 
     public EventScreen(final PirateGame main){
         super(main);
@@ -129,10 +129,6 @@ public class EventScreen extends BaseScreen {
             }
         });
 
-        eventLostLabel = new Label("The sea monster caught you and damage your ship! You lost some gold and wood.",
-                main.getSkin(), "default_black");
-
-
         // Create event win Table
         winTable = new Table();
 
@@ -150,20 +146,36 @@ public class EventScreen extends BaseScreen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Win button clicked");
-
-//                System.out.println(playerShip.getX()+" "+playerShip.getY());
-//                playerShip.setX(2560);
-//                playerShip.setY(1729);
-
                 pirateGame.setScreen(pirateGame.getSailingScene());
                 dispose();
                 return true;
             }
+        });
 
+        // Create event lost Table
+        lostTable = new Table();
+
+        eventLostLabel = new Label("The sea monster caught you and damage your ship! You lost some gold and wood.",
+                main.getSkin(), "default_black");
+        eventLostButton = new TextButton("Return to sailing", main.getSkin());
+
+        lostTable.add(eventLostLabel).fill().padBottom(viewHeight/40);
+        lostTable.row();
+        lostTable.add(eventLostButton);
+        lostTable.align(Align.center);
+        lostTable.setFillParent(true);
+
+        eventLostButton.addListener(new ClickListener() {
+            @Override
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+                System.out.println("Lost button clicked");
+                pirateGame.setScreen(pirateGame.getSailingScene());
+                dispose();
+                return true;
+            }
         });
 
         eventMsgBatch = new SpriteBatch();
-
 
         MapObjects objects = tiledMap.getLayers().get("ObjectData").getObjects();
         for (MapObject object : objects) {
@@ -235,7 +247,13 @@ public class EventScreen extends BaseScreen {
         }
 
         if (playerShip.overlaps(monster, false)){
-            System.out.println("Dead!");
+            isEventLost = true;
+            this.monster.setSpeed(0);
+            this.monster.setAccelerationXY(0,0);
+            this.playerShip.setSpeed(0);
+
+            uiStage.clear();
+            uiStage.addActor(lostTable);
         }
 
         for (BaseActor obstacle : obstacleList) {
@@ -291,7 +309,7 @@ public class EventScreen extends BaseScreen {
 
         tiledMapRenderer.render(foregroundLayers);
 
-        if (!startMsgAcknoledged || isEndReached()){
+        if (!startMsgAcknoledged || isEndReached() || isEventLost){
             eventMsgBatch.begin();
             eventMsgBatch.draw(eventMsgBox, Gdx.graphics.getWidth() / 2 - eventMsgBox.getWidth() / 2,
                     Gdx.graphics.getHeight() / 2 - eventMsgBox.getHeight() / 2);
@@ -299,7 +317,7 @@ public class EventScreen extends BaseScreen {
             uiStage.draw();
         }
 
-        if (!endReached){
+        if (!isEndReached()){
             if (!playerShip.isAnchor()) {
                 playerShip.addAccelerationAS(playerShip.getRotation(), 10000);
             } else {

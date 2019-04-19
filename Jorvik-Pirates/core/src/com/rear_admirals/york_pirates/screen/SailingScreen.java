@@ -384,7 +384,8 @@ public class SailingScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         uiStage.act(delta);
-
+        System.out.println(playerShip.getX());
+        System.out.println("y" + playerShip.getY());
         mainStage.act(delta);
         update(delta);
 
