@@ -17,18 +17,21 @@ import com.badlogic.gdx.utils.Align;
 import com.rear_admirals.york_pirates.College;
 import com.rear_admirals.york_pirates.PirateGame;
 import com.rear_admirals.york_pirates.Player;
+import com.rear_admirals.york_pirates.SailingMonster;
 import com.rear_admirals.york_pirates.base.BaseScreen;
 
 public class MapScreen extends BaseScreen {
     private Player player;
+    private SailingMonster sailingMonster;
     private Texture background,ship,siren,whirlpool,monster;
     private Image bgImage,shipImage,sirenImage,whirlpoolImage,monsterImage;
     private float scalX,scalY;
     private float eventSize;
 
-    public MapScreen(PirateGame main) {
+    public MapScreen(PirateGame main,SailingMonster sailingMonster) {
         super(main);
         this.player = main.getPlayer();
+        this.sailingMonster = sailingMonster;
 
         scalX = 4992/mainStage.getWidth();
         scalY = 3328/mainStage.getHeight();
@@ -53,7 +56,7 @@ public class MapScreen extends BaseScreen {
         //event label testing
         setImage(sirenImage,3000,2000);
         setImage(whirlpoolImage,1000,1000);
-        setImage(monsterImage,2500,1500);
+        setImage(monsterImage,sailingMonster.getX(),sailingMonster.getY());
 
         mainStage.addActor(bgImage);
         mainStage.addActor(shipImage);

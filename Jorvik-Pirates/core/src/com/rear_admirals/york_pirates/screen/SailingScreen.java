@@ -395,7 +395,7 @@ public class SailingScreen extends BaseScreen {
         //A4:MapScreen Testing
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             System.out.println("Map");
-            pirateGame.setScreen(new MapScreen(pirateGame));
+            pirateGame.setScreen(new MapScreen(pirateGame,sailingMonster));
         }
         //A4: return to the main menu
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
