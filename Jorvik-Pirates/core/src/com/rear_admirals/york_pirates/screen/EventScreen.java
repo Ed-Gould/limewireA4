@@ -81,7 +81,7 @@ public class EventScreen extends BaseScreen {
     public EventScreen(final PirateGame main){
         super(main);
 
-        playerShip = new Ship(Player, "Event Ship", Derwent);;
+        playerShip = new Ship(Player, "Event Ship", Derwent);
         monster = new Monster("monster-4.png");
 
         mainStage.addActor(playerShip);
@@ -150,11 +150,6 @@ public class EventScreen extends BaseScreen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Win button clicked");
-
-//                System.out.println(playerShip.getX()+" "+playerShip.getY());
-//                playerShip.setX(2560);
-//                playerShip.setY(1729);
-
                 pirateGame.setScreen(pirateGame.getSailingScene());
                 dispose();
                 return true;

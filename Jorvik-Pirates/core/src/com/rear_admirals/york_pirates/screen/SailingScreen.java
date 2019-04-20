@@ -379,6 +379,11 @@ public class SailingScreen extends BaseScreen {
             pirateGame.setScreen(new MapScreen(pirateGame));
         }
 
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            System.out.println("Map");
+            pirateGame.setScreen(new MainMenu(pirateGame));
+        }
+
     }
 
     @Override
