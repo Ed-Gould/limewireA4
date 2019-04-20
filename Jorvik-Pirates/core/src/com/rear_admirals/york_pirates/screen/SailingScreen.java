@@ -11,16 +11,14 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Align;
-import com.rear_admirals.york_pirates.College;
-import com.rear_admirals.york_pirates.ShipType;
+import com.rear_admirals.york_pirates.*;
 import com.rear_admirals.york_pirates.screen.combat.CombatScreen;
 import com.rear_admirals.york_pirates.base.BaseActor;
-import com.rear_admirals.york_pirates.PirateGame;
 import com.rear_admirals.york_pirates.base.BaseScreen;
-import com.rear_admirals.york_pirates.Ship;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -31,9 +29,12 @@ import static com.rear_admirals.york_pirates.ShipType.*;
 
 public class SailingScreen extends BaseScreen {
 
-    private Ship playerShip;
 
-    //Map Variables
+    // Entity variables
+    private Ship playerShip;
+    private SailingMonster sailingMonster;
+
+    //Map variables
     private ArrayList<BaseActor> obstacleList;
     private ArrayList<BaseActor> removeList;
     private ArrayList<BaseActor> regionList;
@@ -76,7 +77,10 @@ public class SailingScreen extends BaseScreen {
         playerShip = main.getPlayer().getPlayerShip();
         System.out.println(playerShip.getName());
 
+        sailingMonster = new SailingMonster("sailingMonster_1.png");
+
         mainStage.addActor(playerShip);
+        mainStage.addActor(sailingMonster);
         System.out.println("playerShip added");
 
         // A4: Cleaned up code for UI table, added display for health
@@ -168,7 +172,10 @@ public class SailingScreen extends BaseScreen {
 
             if (name.equals("player")) {
                 playerShip.setPosition(r.x, r.y);
-            } else {
+            } else if (name.equals("monster")) {
+                sailingMonster.setPosition(r.x, r.y);
+            }
+            else {
                 System.err.println("Unknown tilemap object: " + name);
             }
         }
@@ -247,6 +254,14 @@ public class SailingScreen extends BaseScreen {
         removeList.clear();
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         this.playerShip.playerMove(delta);
+        this.sailingMonster.move(obstacleList);
+
+        if (this.playerShip.overlaps(sailingMonster, false)){
+            pirateGame.setScreen(new EventScreen(pirateGame));
+            sailingMonster.setX(1000000);
+            playerShip.setSpeed(0);
+            playerShip.setAnchor(true);
+        }
 
         Boolean x = false;
         for (BaseActor region : regionList) {
@@ -266,13 +281,13 @@ public class SailingScreen extends BaseScreen {
                     enemyChance = 10;
                 }
                 if (roll <= enemyChance) {
-                    System.out.println("Enemy Found in " + name);
-                    College college = region.getCollege();
-                    if (!playerShip.getCollege().getAlly().contains(college)) {
-                        System.out.println(name);
-                        //Start combat
-                        pirateGame.setScreen(new CombatScreen(pirateGame, new Ship(Enemy, college)));
-                    }
+                        System.out.println("Enemy Found in " + name);
+                        College college = region.getCollege();
+                        if (!playerShip.getCollege().getAlly().contains(college)) {
+                            System.out.println(name);
+                            //Start combat
+                            pirateGame.setScreen(new CombatScreen(pirateGame, new Ship(Enemy, college)));
+                        }
                 }
             }
             //End Altered
@@ -330,6 +345,10 @@ public class SailingScreen extends BaseScreen {
 //                    System.out.println("Pure obstacle");
                 }
             }
+            //System.out.println(playerShip.getSpeed());
+            if (sailingMonster.overlaps(obstacle, true)) {
+                // Todo: Add logic to turn monster around when colliding with land
+            }
         }
 
         if (!y) hintMessage.setText("");
@@ -373,12 +392,12 @@ public class SailingScreen extends BaseScreen {
         healthValueLabel.setText(Integer.toString(pirateGame.getPlayer().getPlayerShip().getHealth()));
         woodsValueLabel.setText(Integer.toString(pirateGame.getPlayer().getWoods()));
 
-        //MapScreen Testing
+        //A4:MapScreen Testing
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             System.out.println("Map");
             pirateGame.setScreen(new MapScreen(pirateGame));
         }
-
+        //A4: return to the main menu
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             System.out.println("Map");
             pirateGame.setScreen(new MainMenu(pirateGame));
@@ -389,7 +408,6 @@ public class SailingScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         uiStage.act(delta);
-
         mainStage.act(delta);
         update(delta);
 

@@ -50,7 +50,7 @@ public class MainMenu extends BaseScreen {
         TextButton combat_mode = new TextButton("Go to Combat Mode", pirateGame.getSkin());
         TextButton college_mode = new TextButton("Go to College screen", pirateGame.getSkin());
         TextButton department_mode = new TextButton("Go to Department screen", pirateGame.getSkin());
-        TextButton weather_mode = new TextButton("Go to Weather screen", pirateGame.getSkin());
+        TextButton weather_mode = new TextButton("Go to Monster screen", pirateGame.getSkin());
         //Added For Assessment 3
         TextButton exit_game = new TextButton("Exit Game", pirateGame.getSkin());
         //End Added
