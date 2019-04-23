@@ -4,25 +4,21 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Align;
 import com.rear_admirals.york_pirates.base.BaseActor;
 import com.rear_admirals.york_pirates.base.PhysicsActor;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class SailingMonster extends PhysicsActor {
-    private String name;
+public class SailingWhirlpool extends PhysicsActor {
     private Texture texture;
     private int direction;
 
-    private static final int speed = 250;
+    private static final int speed = 50;
 
-    public SailingMonster(String textureString){
-        this.texture = new Texture((Gdx.files.internal(textureString)));
+    public SailingWhirlpool(){
+        this.texture = new Texture((Gdx.files.internal("whirlpool1.png")));
         this.setWidth(this.texture.getWidth());
         this.setHeight(this.texture.getHeight());
         this.setOrigin(Align.center);
@@ -31,33 +27,24 @@ public class SailingMonster extends PhysicsActor {
         this.setMaxSpeed(speed);
     }
 
-    //Get a random direction.
-    public int getRandomDirection(){
-        return (int)((Math.random()*360));
-    }
-
-    public void move(ArrayList<BaseActor> obstacleList) {
-
+    public void setRandomPosition(ArrayList<BaseActor> obstacleList){
+        this.setX((int) (Math.random() * 4500));
+        this.setY((int) (Math.random() * 3000));
         for (BaseActor obstacle : obstacleList) {
-
-            if (this.overlaps(obstacle, false)) {
-                this.setAnchor(true);
-                direction = getRandomDirection();
-                this.rotateBy(direction);
-                this.setAnchor(false);
-                this.setAccelerationXY(0, 0);
-            }
-            else{
-                this.setAnchor(false);
-                this.setAccelerationXY(0, 0);
-                this.addAccelerationAS(this.getRotation(), 10000);
+            if(this.overlaps(obstacle,false)){
+                setRandomPosition(obstacleList);
             }
         }
     }
 
-    public void reverseVelocity(){
-        this.rotateBy(180);
+    public void move(boolean changePosition,ArrayList<BaseActor> obstacleList) {
+        if (!changePosition) {
+            this.addAction(Actions.rotateBy(2, 1));
+        } else {
+            setRandomPosition(obstacleList);
+        }
     }
+
 
     @Override
     public void draw(Batch batch, float alpha) {

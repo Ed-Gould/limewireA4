@@ -14,24 +14,23 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
-import com.rear_admirals.york_pirates.College;
-import com.rear_admirals.york_pirates.PirateGame;
-import com.rear_admirals.york_pirates.Player;
-import com.rear_admirals.york_pirates.SailingMonster;
+import com.rear_admirals.york_pirates.*;
 import com.rear_admirals.york_pirates.base.BaseScreen;
 
 public class MapScreen extends BaseScreen {
     private Player player;
     private SailingMonster sailingMonster;
-    private Texture background,ship,siren,whirlpool,monster;
+    private SailingWhirlpool sailingWhirlpool;
+    private Texture background,ship,whirlpool,monster;
     private Image bgImage,shipImage,sirenImage,whirlpoolImage,monsterImage;
     private float scalX,scalY;
     private float eventSize;
 
-    public MapScreen(PirateGame main,SailingMonster sailingMonster) {
+    public MapScreen(PirateGame main, SailingMonster sailingMonster, SailingWhirlpool sailingWhirlpool) {
         super(main);
         this.player = main.getPlayer();
         this.sailingMonster = sailingMonster;
+        this.sailingWhirlpool = sailingWhirlpool;
 
         scalX = 4992/mainStage.getWidth();
         scalY = 3328/mainStage.getHeight();
@@ -39,13 +38,11 @@ public class MapScreen extends BaseScreen {
 
         background = new Texture(Gdx.files.internal("map_A4.png"));
         ship = new Texture(Gdx.files.internal("map_ship.png"));
-        siren = new Texture(Gdx.files.internal("map_siren.png"));
         whirlpool = new Texture(Gdx.files.internal("map_whirlpool.png"));
         monster = new Texture(Gdx.files.internal("map_monster.png"));
 
         bgImage = new Image(background);
         shipImage = new Image(ship);
-        sirenImage = new Image(siren);
         whirlpoolImage = new Image(whirlpool);
         monsterImage = new Image(monster);
 
@@ -54,13 +51,11 @@ public class MapScreen extends BaseScreen {
 
         setImage(shipImage,player.getPlayerShip().getX(),player.getPlayerShip().getY());
         //event label testing
-        setImage(sirenImage,3000,2000);
-        setImage(whirlpoolImage,1000,1000);
+        setImage(whirlpoolImage,sailingWhirlpool.getX(),sailingWhirlpool.getY());
         setImage(monsterImage,sailingMonster.getX(),sailingMonster.getY());
 
         mainStage.addActor(bgImage);
         mainStage.addActor(shipImage);
-        mainStage.addActor(sirenImage);
         mainStage.addActor(whirlpoolImage);
         mainStage.addActor(monsterImage);
 

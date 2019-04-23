@@ -33,6 +33,7 @@ public class SailingScreen extends BaseScreen {
     // Entity variables
     private Ship playerShip;
     private SailingMonster sailingMonster;
+    private SailingWhirlpool sailingWhirlpool;
 
     //Map variables
     private ArrayList<BaseActor> obstacleList;
@@ -69,6 +70,7 @@ public class SailingScreen extends BaseScreen {
 
     //Altered For Assessment 3
     private double timer;
+    private double whirlpooltimer;
     //End Altered
 
     public SailingScreen(final PirateGame main) {
@@ -78,9 +80,12 @@ public class SailingScreen extends BaseScreen {
         System.out.println(playerShip.getName());
 
         sailingMonster = new SailingMonster("sailingMonster_1.png");
+        sailingWhirlpool = new SailingWhirlpool();
 
+        mainStage.addActor(sailingWhirlpool);
         mainStage.addActor(playerShip);
         mainStage.addActor(sailingMonster);
+
         System.out.println("playerShip added");
 
         // A4: Cleaned up code for UI table, added display for health
@@ -174,7 +179,10 @@ public class SailingScreen extends BaseScreen {
                 playerShip.setPosition(r.x, r.y);
             } else if (name.equals("monster")) {
                 sailingMonster.setPosition(r.x, r.y);
+            } else if (name.equals("whirlpool")) {
+                sailingWhirlpool.setPosition(r.x, r.y);
             }
+
             else {
                 System.err.println("Unknown tilemap object: " + name);
             }
@@ -251,16 +259,37 @@ public class SailingScreen extends BaseScreen {
 
     @Override
     public void update(float delta) {
+        whirlpooltimer += delta;
         removeList.clear();
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         this.playerShip.playerMove(delta);
         this.sailingMonster.move(obstacleList);
+        if(whirlpooltimer>15){
+            this.sailingWhirlpool.move(true,obstacleList);
+            whirlpooltimer = 0;
+        }
+        else {
+            this.sailingWhirlpool.move(false,obstacleList);
+        }
+
 
         if (this.playerShip.overlaps(sailingMonster, false)){
             pirateGame.setScreen(new EventScreen(pirateGame));
             sailingMonster.setX(1000000);
             playerShip.setSpeed(0);
             playerShip.setAnchor(true);
+        }
+
+        if(this.playerShip.overlaps(sailingWhirlpool,false)){
+            playerShip.setMaxSpeed(50);
+            timer += delta;
+            if (timer > 1) {
+                playerShip.damage(2);
+                timer -= 1;
+                playerShip.setHealth(playerShip.getHealth()-1);
+            }
+        }else{
+            playerShip.setMaxSpeed(500);
         }
 
         Boolean x = false;
@@ -395,7 +424,7 @@ public class SailingScreen extends BaseScreen {
         //A4:MapScreen Testing
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             System.out.println("Map");
-            pirateGame.setScreen(new MapScreen(pirateGame,sailingMonster));
+            pirateGame.setScreen(new MapScreen(pirateGame,sailingMonster,sailingWhirlpool));
         }
         //A4: return to the main menu
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
