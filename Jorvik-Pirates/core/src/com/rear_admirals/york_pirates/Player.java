@@ -27,9 +27,9 @@ public class Player {
         this.points = 0;
         this.woods = 0;
         this.engineer = false;
-        // this.collegeDefeated = 0;
+         this.collegeDefeated = 0;
         //A4: testing number for college defeated.
-        this.collegeDefeated = 1;
+        //this.collegeDefeated = 1;
 
         attacks.add(Ram.attackRam);
         attacks.add(GrapeShot.attackSwivel);

@@ -54,6 +54,8 @@ public class MainMenu extends BaseScreen {
         //Added For Assessment 3
         TextButton exit_game = new TextButton("Exit Game", pirateGame.getSkin());
         //End Added
+        //A4: add scoreboard.
+        TextButton scoreboard_screen = new TextButton("Scoreboard",pirateGame.getSkin());
 
         // Allows button to be clickable, and sets process for when clicked.
         combat_mode.addListener(new ClickListener() {
@@ -108,7 +110,18 @@ public class MainMenu extends BaseScreen {
         });
         //End Added
 
+        //A4: add scoreboard
+        scoreboard_screen.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                pirateGame.setScreen(new ScoreboardScreen(pirateGame));
+                dispose();
+            }
+        });
+        //End Added
+
         tableContainer.setActor(table);
+
 
         table.add(title).padBottom(viewWidth / 20).width(viewWidth / 2);
         table.row(); // Ends the current row
@@ -125,6 +138,8 @@ public class MainMenu extends BaseScreen {
         table.add(weather_mode).uniform().fill().padBottom(viewHeight / 40);
         table.row();
         table.add(exit_game).uniform().padBottom(viewHeight / 40).size(viewWidth / 2, viewHeight / 10);
+        table.row();
+        table.add(scoreboard_screen).uniform().padBottom(viewHeight / 40).size(viewWidth / 2, viewHeight / 10);
 
         stage.addActor(tableContainer);
 

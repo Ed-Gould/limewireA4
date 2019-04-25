@@ -544,45 +544,25 @@ public class CombatScreen extends BaseScreen {
 
             ;
 
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                descriptionLabel.setText("What would you like to do?");
-            }
+//            @Override
+//            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+//                descriptionLabel.setText("What would you like to do?");
+//            }
 
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(player.getWoods()>0){
+                if((player.getWoods()>0)
+                        &&(player.getPlayerShip().getHealth()!=player.getPlayerShip().getHealthMax())){
                     combatStack.push(button.getAttack());
                     combatHandler(BattleEvent.PLAYER_MOVE);
+                }else if(player.getPlayerShip().getHealth()==player.getPlayerShip().getHealthMax()){
+                    descriptionLabel.setText("Your ship don't need to be repaired.");
                 }
                 else{
                     descriptionLabel.setText("There is no enough wood to repair the ship.");
                 }
 
-            }
-        });
-    }
-
-    public void buttonListener(final AttackButton button, final String message) {
-        button.addListener(new ClickListener() {
-            @Override
-            public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                descriptionLabel.setText(button.getDesc());
-            }
-
-            ;
-
-            @Override
-            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                descriptionLabel.setText("Choose an option");
-            }
-
-            ;
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                button.setText(message);
             }
         });
     }
