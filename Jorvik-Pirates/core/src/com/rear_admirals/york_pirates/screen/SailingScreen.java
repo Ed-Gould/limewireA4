@@ -71,6 +71,7 @@ public class SailingScreen extends BaseScreen {
     //Altered For Assessment 3
     private double timer;
     private double whirlpooltimer;
+    private double whirlpoolhealthtimer;
     //End Altered
 
     public SailingScreen(final PirateGame main) {
@@ -282,14 +283,15 @@ public class SailingScreen extends BaseScreen {
 
         if(this.playerShip.overlaps(sailingWhirlpool,false)){
             playerShip.setMaxSpeed(50);
-            timer += delta;
-            if (timer > 1) {
+            whirlpoolhealthtimer += delta;
+            if (whirlpoolhealthtimer > 1) {
                 playerShip.damage(2);
-                timer -= 1;
+                whirlpoolhealthtimer -= 1;
                 playerShip.setHealth(playerShip.getHealth()-1);
             }
         }else{
             playerShip.setMaxSpeed(500);
+            whirlpoolhealthtimer = 0;
         }
 
         Boolean x = false;
