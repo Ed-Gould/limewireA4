@@ -10,6 +10,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.rear_admirals.york_pirates.College;
 import com.rear_admirals.york_pirates.Department;
 
+/**
+ * BaseActor is the abstract base class for all entities such as
+ * the player, their ship, or enemy ships as well as college/department
+ * islands and obstacles.
+ * Extends LibGDX Group class
+ */
 public class BaseActor extends Group {
 
     private TextureRegion region;
@@ -17,6 +23,9 @@ public class BaseActor extends Group {
     private College college;
     private Department department;
 
+    /**
+     * Basic abstract constructor
+     */
     public BaseActor() {
         super();
         region = new TextureRegion();
@@ -25,10 +34,21 @@ public class BaseActor extends Group {
         department = null;
     }
 
+    /**
+     * Calls LibGDX to update the BaseActor object's actions on screen
+     * based on the delta time from the last render on screen.
+     * @param dt - delta time, used to calculate where the BaseActor's
+     *             action should be at that point in time
+     */
     public void act(float dt) {
         super.act(dt);
     }
 
+    /**
+     * Calls LibGDX to draw the BaseActor on the screen (batch) specified.
+     * @param batch - the window canvas to be drawn on
+     * @param parentAlpha - ==============================================
+     */
     public void draw(Batch batch, float parentAlpha) {
         Color c = getColor();
         batch.setColor(c.r, c.g, c.b, c.a);
@@ -37,6 +57,10 @@ public class BaseActor extends Group {
         super.draw(batch, parentAlpha);
     }
 
+    /**
+     * Sets boundary for rectangle shaped actors.
+     * Used for things college/department islands
+     */
     public void setRectangleBoundary() {
         float w = getWidth();
         float h = getHeight();
@@ -45,6 +69,10 @@ public class BaseActor extends Group {
         boundingPolygon.setOrigin(getOriginX(), getOriginY());
     }
 
+    /**
+     * Sets boundaries for ellipse shaped actors such
+     * as ships
+     */
     public void setEllipseBoundary() {
         // number of vertices;
         int n = 8;
