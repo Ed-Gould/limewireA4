@@ -126,16 +126,17 @@ public class MainMenu extends BaseScreen {
         table.add(title).padBottom(viewWidth / 20).width(viewWidth / 2);
         table.row(); // Ends the current row
         table.add(sailing_mode).uniform().padBottom(viewHeight / 40).size(viewWidth / 2, viewHeight / 10);
-        table.row();
-        table.add(new Label("These are for demo purposes, to show implementation of combat and colleges.", pirateGame.getSkin()));
-        table.row();
-        table.add(combat_mode).uniform().padBottom(viewHeight / 40).fill();
-        table.row();
-        table.add(college_mode).uniform().fill().padBottom(viewHeight / 40);
-        table.row();
-        table.add(department_mode).uniform().fill().padBottom(viewHeight / 40);
-        table.row();
-        table.add(weather_mode).uniform().fill().padBottom(viewHeight / 40);
+        //A4: Remove unnecessary button for testing purposes for the final product.
+//        table.row();
+//        table.add(new Label("These are for demo purposes, to show implementation of combat and colleges.", pirateGame.getSkin()));
+//        table.row();
+//        table.add(combat_mode).uniform().padBottom(viewHeight / 40).fill();
+//        table.row();
+//        table.add(college_mode).uniform().fill().padBottom(viewHeight / 40);
+//        table.row();
+//        table.add(department_mode).uniform().fill().padBottom(viewHeight / 40);
+//        table.row();
+//        table.add(weather_mode).uniform().fill().padBottom(viewHeight / 40);
         table.row();
         table.add(exit_game).uniform().padBottom(viewHeight / 40).size(viewWidth / 2, viewHeight / 10);
         table.row();

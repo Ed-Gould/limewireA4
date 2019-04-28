@@ -67,6 +67,7 @@ public class SailingScreen extends BaseScreen {
 
     private Label mapMessage;
     private Label hintMessage;
+    private Label objectiveMessage;
 
     //Altered For Assessment 3
     private double timer;
@@ -134,6 +135,8 @@ public class SailingScreen extends BaseScreen {
 
         mapMessage = new Label("", main.getSkin(), "default_black");
         hintMessage = new Label("", main.getSkin(), "default_black");
+        objectiveMessage = new Label("Defeat Langwith College\nto win the game."
+                ,main.getSkin(),"default_black");
 
         Table messageTable = new Table();
         messageTable.add(mapMessage);
@@ -143,7 +146,14 @@ public class SailingScreen extends BaseScreen {
         messageTable.setFillParent(true);
         messageTable.top();
 
+        //A4: adding hint message of how to finish the game
+        Table objectiveTable = new Table();
+        objectiveTable.add(objectiveMessage).align(Align.right);
+        objectiveTable.setFillParent(true);
+        objectiveTable.align(Align.topLeft);
+
         uiStage.addActor(messageTable);
+        uiStage.addActor(objectiveTable);
 
         obstacleList = new ArrayList<BaseActor>();
         removeList = new ArrayList<BaseActor>();

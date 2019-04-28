@@ -169,6 +169,16 @@ public class EventScreen extends BaseScreen {
             @Override
             public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 System.out.println("Lost button clicked");
+                if(main.getPlayer().getWoods()>=10){
+                    main.getPlayer().setWoods(main.getPlayer().getWoods()-10);
+                }else{
+                    main.getPlayer().setWoods(0);
+                }
+                if(main.getPlayer().getGold()>=30){
+                    main.getPlayer().setGold(main.getPlayer().getGold()-30);
+                }else{
+                    main.getPlayer().setGold(0);
+                }
                 pirateGame.setScreen(pirateGame.getSailingScene());
                 dispose();
                 return true;
