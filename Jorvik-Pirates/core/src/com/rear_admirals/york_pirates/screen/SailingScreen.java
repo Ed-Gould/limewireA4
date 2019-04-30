@@ -275,6 +275,8 @@ public class SailingScreen extends BaseScreen {
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         this.playerShip.playerMove(delta);
         this.sailingMonster.move(obstacleList);
+
+        //A4: updating event for whirlpool and sea monster
         if(whirlpooltimer>15){
             this.sailingWhirlpool.move(true,obstacleList);
             whirlpooltimer = 0;
@@ -303,6 +305,7 @@ public class SailingScreen extends BaseScreen {
             playerShip.setMaxSpeed(500);
             whirlpoolhealthtimer = 0;
         }
+        //End of A4 changes.
 
         Boolean x = false;
         for (BaseActor region : regionList) {

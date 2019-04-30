@@ -377,7 +377,7 @@ public class CombatScreen extends BaseScreen {
                         System.out.println("Flee Failed");
                         dialog("Flee failed.", BattleEvent.ENEMY_MOVE);
                     }
-                }else if (currentAttack.getName() == "REPAIR"){
+                }else if (currentAttack.getName() == "REPAIR"){ //A4: adding repair event.
                     player.useWoods();
                     System.out.println("Player repaired the ship.");
                     dialog("Ship repaired.", BattleEvent.PLAYER_REPAIR);
