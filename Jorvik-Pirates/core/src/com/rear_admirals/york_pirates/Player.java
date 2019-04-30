@@ -9,6 +9,9 @@ import java.util.List;
 import static com.rear_admirals.york_pirates.College.*;
 import static com.rear_admirals.york_pirates.ShipType.*;
 
+/**
+ * Player class handles the user's character in the game
+ */
 public class Player {
     private Ship playerShip;
     private int gold;
@@ -19,6 +22,9 @@ public class Player {
     private int collegeDefeated;
     public static List<Attack> attacks = new ArrayList<Attack>();
 
+    /**
+     * Basic Constructor
+     */
     public Player() {
         //Altered For Assessment 3
         this.playerShip = new Ship(Player, "Your Ship", Derwent);
@@ -27,7 +33,7 @@ public class Player {
         this.points = 0;
         this.woods = 0;
         this.engineer = false;
-         this.collegeDefeated = 0;
+        this.collegeDefeated = 0;
         //A4: testing number for college defeated.
         //this.collegeDefeated = 1;
 
@@ -40,6 +46,9 @@ public class Player {
         this.playerShip = ship;
         this.gold = 0;
         this.points = 0;
+        this.woods = 0;
+        this.engineer = false;
+        this.collegeDefeated = 0;
 
         attacks.add(Ram.attackRam);
         attacks.add(Attack.attackSwivel);
