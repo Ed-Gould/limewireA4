@@ -1,5 +1,6 @@
 package com.rear_admirals.york_pirates;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
@@ -12,6 +13,10 @@ public class PlayerTest extends GameTest {
 
     @Mock
     Ship playerShip;
+
+    // allows @Mock mocks to be used
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     /**
      * Tests for the payGold() method
@@ -64,8 +69,9 @@ public class PlayerTest extends GameTest {
      */
     @Test
     public void useWoodsTest() {
+        doNothing().when(playerShip).heal(anyInt());
+
         Player player = new Player(playerShip);
-        
 
         // player has 0 wood by default
         assertFalse(player.useWoods());
@@ -79,5 +85,20 @@ public class PlayerTest extends GameTest {
         // Now assume player has enough wood
         player.setWoods(10);
         assertTrue(player.useWoods());
+
+        // player's wood should be 0 after the last useWoods call
+        assertFalse(player.useWoods());
+
+        // should only have enough wood for one repair
+        player.setWoods(19);
+        assertTrue(player.useWoods());
+        assertFalse(player.useWoods());
+
+        // so should now be able to repair 4 times before having too little wood
+        player.setWoods(45);
+        for (int i = 0; i < 4; i++) {
+            assertTrue(player.useWoods());
+        }
+        assertFalse(player.useWoods());
     }
 }

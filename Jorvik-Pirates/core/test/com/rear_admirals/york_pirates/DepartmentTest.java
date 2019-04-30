@@ -19,6 +19,7 @@ public class DepartmentTest extends GameTest {
     @Mock
     PirateGame pirateGame;
 
+    // allows @Mock mocks to be used
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
