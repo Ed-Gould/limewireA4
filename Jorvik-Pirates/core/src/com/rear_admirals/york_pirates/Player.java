@@ -42,6 +42,10 @@ public class Player {
         attacks.add(Attack.attackBoard);
     }
 
+    /**
+     * Constructor with ship
+     * @param ship - the ship object to be the player's ship
+     */
     public Player(Ship ship) {
         this.playerShip = ship;
         this.gold = 0;
@@ -89,6 +93,14 @@ public class Player {
 
     public void setEngineer(boolean engineer){this.engineer = engineer;}
 
+    /**
+     * Used whenever the player makes a transaction
+     * e.g buying an upgrade or wood for repairs
+     *
+     * @param value - the amount of gold to pay
+     * @return boolean saying whether or not the transaction
+     *          was successful
+     */
     public boolean payGold(int value) {
         if (value > gold) {
             return false;
@@ -98,6 +110,13 @@ public class Player {
         }
     }
 
+    /**
+     * Called when the user tries to make repairs
+     * Repairs the player's ship if they have
+     * at least 10 wood
+     *
+     * @return boolean - whether or not the repair was successful
+     */
     public boolean useWoods() {
         if (10 > woods) {
             return false;
