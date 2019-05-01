@@ -13,6 +13,18 @@ public class ShipType {
     private String name;
     private Texture texture;
 
+    /**
+     * ShipType Constructor
+     *
+     * @param name - name of ship type e.g Brig, Frigate
+     * @param attack - strength of ship type's attacks
+     * @param defence - strength of ship type's defence
+     * @param accuracy - accuracy of ship type's weapons
+     * @param health - default starting health of ship type
+     * @param goldValue - the amount of gold the ship type is worth,
+     *                  player will receive this amount if they defeat it
+     * @param pointValue - points the player gains by defeating this ship type
+     */
     //Altered For Assessment 3
     public ShipType(String name, int attack, int defence, int accuracy, int health, int goldValue, int pointValue) {
         this.name = name;

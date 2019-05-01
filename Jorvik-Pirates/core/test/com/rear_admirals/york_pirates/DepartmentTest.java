@@ -106,7 +106,7 @@ public class DepartmentTest extends GameTest {
 
         Department noneDepartment = new Department("Wentworth", "", pirateGame);
         // Should return 0 if the department has no upgrade to offer
-        assertEquals(noneDepartment.getUpgradeCost(), 0);
+        assertEquals(0, noneDepartment.getUpgradeCost());
     }
 
     @Test

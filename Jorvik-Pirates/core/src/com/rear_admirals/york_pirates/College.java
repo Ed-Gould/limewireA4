@@ -2,12 +2,21 @@ package com.rear_admirals.york_pirates;
 
 import java.util.ArrayList;
 
+/**
+ * College class
+ * Creates and handles colleges in the game
+ */
 public class College {
 
     private final String name;
     private ArrayList<College> ally;
     private boolean bossDead;
 
+    /**
+     * College Constructor
+     *
+     * @param name - name of the college
+     */
     public College(String name) {
         this.name = name;
         this.ally = new ArrayList<College>();

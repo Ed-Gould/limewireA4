@@ -16,14 +16,14 @@ public class ShipTest extends GameTest{
         // ship health = 100 by default
         // test that healing by 0 doesn't change anything
         ship.heal(0);
-        assertEquals(ship.getHealth(), 100);
+        assertEquals(100, ship.getHealth());
 
         //
         ship.setHealth(50);
         ship.heal(20);
-        assertEquals(ship.getHealth(), 70);
+        assertEquals(70, ship.getHealth());
 
         ship.heal(50);
-        assertEquals(ship.getHealth(), 100);
+        assertEquals(100, ship.getHealth());
     }
 }

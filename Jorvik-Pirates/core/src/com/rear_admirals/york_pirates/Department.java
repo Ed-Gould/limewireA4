@@ -8,6 +8,14 @@ public class Department {
     private PirateGame pirateGame;
     private Ship playerShip;
 
+    /**
+     * Department Constructor
+     *
+     * @param name - Name of the department
+     * @param product - the product the department offers to the player
+     *                e.g upgrade of some kind
+     * @param pirateGame - the LibGDX Game object which this department will be added to
+     */
     public Department(String name, String product, PirateGame pirateGame) {
         this.name = name;
         this.product = product;
@@ -16,7 +24,6 @@ public class Department {
         this.pirateGame = pirateGame;
         this.playerShip = pirateGame.getPlayer().getPlayerShip();
     }
-
 
     /**
      * Upgrade ship by spending gold.
@@ -53,8 +60,16 @@ public class Department {
         return 0;
     }
 
+    /**
+     * Calculates cost for upgrade chosen by the player
+     * @param upgradeStat - the stat to be upgraded:
+     *                    either defence, attack, or accuracy
+     *
+     * @return - the total cost to upgrade chosen stat
+     */
     public int calculateCost(int upgradeStat){
         // 5 is the starting value for players stats
+        // so first 5 are not accounted for in the cost
         return baseUpgradeCost + costPerLevel * (upgradeStat - 5);
     }
     // End of A4 change

@@ -71,7 +71,7 @@ public class EventScreen extends BaseScreen {
 
     private SpriteBatch eventMsgBatch;
     private Texture eventMsgBox = new Texture(Gdx.files.internal("eventMsgBox.png"));
-    private boolean startMsgAcknoledged = false;
+    private boolean startMsgAcknowledged = false;
     private boolean isEventLost = false;
 
     private Table startTable, winTable, lostTable;
@@ -125,7 +125,7 @@ public class EventScreen extends BaseScreen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Start button clicked");
-                startMsgAcknoledged = true;
+                startMsgAcknowledged = true;
             }
         });
 
@@ -239,7 +239,7 @@ public class EventScreen extends BaseScreen {
     public void update(float delta){
         //removeList.clear();
 
-        if (startMsgAcknoledged && !isEndReached() && !isEventLost){
+        if (startMsgAcknowledged && !isEndReached() && !isEventLost){
             this.monster.updateSpeed(this.playerShip.getX());
             this.playerShip.playerMove(delta);
             this.monster.move();
@@ -318,7 +318,7 @@ public class EventScreen extends BaseScreen {
 
         tiledMapRenderer.render(foregroundLayers);
 
-        if (!startMsgAcknoledged || isEndReached() || isEventLost){
+        if (!startMsgAcknowledged || isEndReached() || isEventLost){
             eventMsgBatch.begin();
             eventMsgBatch.draw(eventMsgBox, Gdx.graphics.getWidth() / 2 - eventMsgBox.getWidth() / 2,
                     Gdx.graphics.getHeight() / 2 - eventMsgBox.getHeight() / 2);
@@ -334,13 +334,6 @@ public class EventScreen extends BaseScreen {
                 playerShip.setDeceleration(500);
             }
         }
-    }
-
-    public String capitalizeFirstLetter(String original) {
-        if (original == null || original.length() == 0) {
-            return original;
-        }
-        return original.substring(0, 1).toUpperCase() + original.substring(1);
     }
 
     public boolean isEndReached(){

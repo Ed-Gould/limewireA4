@@ -30,7 +30,7 @@ public class PlayerTest extends GameTest {
         assertFalse(player.payGold(10));
         assertFalse(player.payGold(50));
         assertTrue(player.payGold(0));
-        assertEquals(player.getGold(), 0);
+        assertEquals(0, player.getGold());
     }
 
     @Test
@@ -51,13 +51,13 @@ public class PlayerTest extends GameTest {
         player.setGold(50);
 
         assertTrue(player.payGold(0));
-        assertEquals(player.getGold(), 50);
+        assertEquals(50, player.getGold());
 
         assertTrue(player.payGold(10));
-        assertEquals(player.getGold(), 40);
+        assertEquals(40, player.getGold());
 
         assertTrue(player.payGold(40));
-        assertEquals(player.getGold(), 0);
+        assertEquals(0, player.getGold());
 
         assertFalse(player.payGold(1));
     }

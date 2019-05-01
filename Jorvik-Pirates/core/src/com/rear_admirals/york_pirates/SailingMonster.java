@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Handles the monster as displayed on the screen when sailing through the map
+ */
 public class SailingMonster extends PhysicsActor {
     private String name;
     private Texture texture;
@@ -21,6 +24,10 @@ public class SailingMonster extends PhysicsActor {
 
     private static final int speed = 250;
 
+    /**
+     * SailingMonster constructor
+     * @param textureString
+     */
     public SailingMonster(String textureString){
         this.texture = new Texture((Gdx.files.internal(textureString)));
         this.setWidth(this.texture.getWidth());

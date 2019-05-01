@@ -9,6 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.rear_admirals.york_pirates.screen.MainMenu;
 import com.rear_admirals.york_pirates.screen.SailingScreen;
 
+/**
+ * PirateGame handles the main gameloop, rendering things
+ * on screen, etc
+ * Child of LibGDX Game class
+ */
 public class PirateGame extends Game {
     private SpriteBatch batch;
     private BitmapFont font;
@@ -21,6 +26,9 @@ public class PirateGame extends Game {
 	public static Department Maths;
     //End Added
 
+    /**
+     * LibGDX method: Initialises the game
+     */
     public void create() {
         Gdx.graphics.setTitle("York Pirates!");
         this.skin = new Skin(Gdx.files.internal("flat-earth-ui.json"));
@@ -37,12 +45,18 @@ public class PirateGame extends Game {
         setScreen(new MainMenu(this));
     }
 
+    /**
+     * LibGDX method: disposes of objects that are not needed
+     */
     @Override
     public void dispose() {
         batch.dispose();
         font.dispose();
     }
 
+    /**
+     * LibGDX method: renders things on screen
+     */
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
@@ -50,6 +64,11 @@ public class PirateGame extends Game {
         super.render();
     }
 
+    /**
+     * LibGDX method: handles resizing of the game window
+     * @param width - width of window
+     * @param height - height of window
+     */
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
