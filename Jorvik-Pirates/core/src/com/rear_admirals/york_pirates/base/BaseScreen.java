@@ -13,6 +13,10 @@ import com.rear_admirals.york_pirates.Ship;
 
 import java.awt.image.TileObserver;
 
+/**
+ * Basic abstract class for drawing game objects on screen with a GUI
+ * Implements the LibGDX Screen interface
+ */
 public abstract class BaseScreen implements Screen {
 
     protected Stage mainStage;
@@ -23,14 +27,32 @@ public abstract class BaseScreen implements Screen {
     protected final int viewWidth = 1920;
     protected final int viewHeight = 1080;
 
+    /**
+     * BaseScreen Constructor
+     *
+     * @param game - the game which this screen belongs to
+     */
     public BaseScreen(PirateGame game) {
         this.pirateGame = game;
         this.mainStage = new Stage(new FitViewport(this.viewWidth, this.viewHeight));
         this.uiStage = new Stage(new FitViewport(this.viewWidth, this.viewHeight));
     }
 
+    /**
+     * BaseScreen constructor for TESTING ONLY
+     *
+     */
+    @Deprecated
+    public BaseScreen() {}
+
     public abstract void update(float delta);
 
+    /**
+     * renders game objects on screen appropriately
+     * according to the time since last frame
+     *
+     * @param delta
+     */
     public void render(float delta) {
         this.uiStage.act(delta);
         this.mainStage.act(delta);

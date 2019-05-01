@@ -4,6 +4,9 @@ import com.rear_admirals.york_pirates.Ship;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Defines different attacks with their different attributes
+ */
 public class Attack {
 	protected String name;
 	protected String desc;
@@ -14,7 +17,9 @@ public class Attack {
 	protected boolean skipMove;
 	protected int accPercent;
 
-	// Generic constructor. Creates simple broadside attack.
+    /**
+     * Generic constructor. Creates simple broadside attack.
+     */
 	protected Attack() {
 		this.name = "Broadside";
 		this.desc = "Fire a broadside at your enemy.";
@@ -25,8 +30,17 @@ public class Attack {
 		this.accPercent = 1;
 	}
 
-	// Custom constructor. Can be used to create any attack which applies a multiple of the attacker's damage
-	// to the defender. Can also take a turn to charge and have custom accuracy.
+    /**
+     * Custom constructor. Can be used to create any attack which applies a multiple of the attacker's damage
+     // to the defender. Can also take a turn to charge and have custom accuracy.
+     *
+     * @param name
+     * @param desc
+     * @param dmgMultiplier
+     * @param accMultiplier
+     * @param skipMove
+     * @param accPercent
+     */
 	protected Attack(String name, String desc, int dmgMultiplier, double accMultiplier, boolean skipMove, int accPercent) {
 		this.name = name;
 		this.desc = desc;
@@ -47,7 +61,13 @@ public class Attack {
 		}
 	}
 
-	// New function used to check if an attack hits the enemy.
+    /**
+     * New function used to check if an attack hits the enemy.
+     *
+     * @param shipAcc - ship's base accuracy
+     * @param accPercent - ship's attack's accuracy
+     * @return
+     */
 	protected boolean doesHit(int shipAcc, int accPercent) {
 		int random = ThreadLocalRandom.current().nextInt(0, 101);
 		if (accPercent * (1+(shipAcc-3)*0.02) > random){
@@ -57,7 +77,13 @@ public class Attack {
 		}
 	}
 
-	// Function called to actually perform the attack.
+    /**
+     * Function called to actually perform the attack.
+     *
+     * @param attacker - ship making the attack
+     * @param defender - defending ship
+     * @return the damage caused by the attack
+     */
 	public int doAttack(Ship attacker, Ship defender) {
 		if ( doesHit(attacker.getAccuracy(), this.accPercent) ) {
 			this.damage = attacker.getAttack() * this.dmgMultiplier;

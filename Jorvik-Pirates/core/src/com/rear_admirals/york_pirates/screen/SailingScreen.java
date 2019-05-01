@@ -29,7 +29,6 @@ import static com.rear_admirals.york_pirates.ShipType.*;
 
 public class SailingScreen extends BaseScreen {
 
-
     // Entity variables
     private Ship playerShip;
     private SailingMonster sailingMonster;
@@ -71,8 +70,8 @@ public class SailingScreen extends BaseScreen {
 
     //Altered For Assessment 3
     private double timer;
-    private double whirlpooltimer;
-    private double whirlpoolhealthtimer;
+    private double whirlpoolTimer;
+    private double whirlpoolHealthTimer;
     //End Altered
 
     public SailingScreen(final PirateGame main) {
@@ -268,18 +267,28 @@ public class SailingScreen extends BaseScreen {
 //        System.out.println("IP: im");
     }
 
+    /**
+     * SailingScreen constructor for testing
+     */
+    @Deprecated
+    public SailingScreen() {
+        super(); // call to testing constructor of BaseScreen
+        mapPixelHeight = 0;
+        mapPixelWidth = 0;
+    }
+
     @Override
     public void update(float delta) {
-        whirlpooltimer += delta;
+        whirlpoolTimer += delta;
         removeList.clear();
         goldValueLabel.setText(Integer.toString(pirateGame.getPlayer().getGold()));
         this.playerShip.playerMove(delta);
         this.sailingMonster.move(obstacleList);
 
         //A4: updating event for whirlpool and sea monster
-        if(whirlpooltimer>15){
+        if(whirlpoolTimer>15){
             this.sailingWhirlpool.move(true,obstacleList);
-            whirlpooltimer = 0;
+            whirlpoolTimer = 0;
         }
         else {
             this.sailingWhirlpool.move(false,obstacleList);
@@ -295,15 +304,15 @@ public class SailingScreen extends BaseScreen {
 
         if(this.playerShip.overlaps(sailingWhirlpool,false)){
             playerShip.setMaxSpeed(50);
-            whirlpoolhealthtimer += delta;
-            if (whirlpoolhealthtimer > 1) {
+            whirlpoolHealthTimer += delta;
+            if (whirlpoolHealthTimer > 1) {
                 playerShip.damage(2);
-                whirlpoolhealthtimer -= 1;
+                whirlpoolHealthTimer -= 1;
                 playerShip.setHealth(playerShip.getHealth()-1);
             }
         }else{
             playerShip.setMaxSpeed(500);
-            whirlpoolhealthtimer = 0;
+            whirlpoolHealthTimer = 0;
         }
         //End of A4 changes.
 

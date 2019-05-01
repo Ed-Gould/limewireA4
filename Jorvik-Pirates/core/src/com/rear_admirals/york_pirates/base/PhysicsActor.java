@@ -4,6 +4,9 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.rear_admirals.york_pirates.base.BaseActor;
 
+/**
+ * Handles the actors' actions on screen, e.g collisions and movement
+ */
 public class PhysicsActor extends BaseActor {
 
     private Vector2 velocity;
@@ -20,6 +23,9 @@ public class PhysicsActor extends BaseActor {
 
     private boolean anchor;
 
+    /**
+     * PhysicsActor Constructor
+     */
     public PhysicsActor() {
         this.velocity = new Vector2();
         this.acceleration = new Vector2();
@@ -30,6 +36,13 @@ public class PhysicsActor extends BaseActor {
     }
 
     // acceleration/deceleration methods
+
+    /**
+     * sets the acceleration of the actor in both axes
+     *
+     * @param ax - acceleration in X direction
+     * @param ay - acceleration in Y direction
+     */
     public void setAccelerationXY(float ax, float ay) {
         acceleration.set(ax, ay);
     }
@@ -64,6 +77,11 @@ public class PhysicsActor extends BaseActor {
         acceleration.add(amount * MathUtils.cosDeg(angle), amount * MathUtils.sinDeg(angle));
     }
 
+    /**
+     * LibGDX method to display actions on screen
+     *
+     * @param dt - delta time, used to calculate where the BaseActor is at that time
+     */
     public void act(float dt) {
         super.act(dt);
 

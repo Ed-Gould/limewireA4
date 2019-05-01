@@ -16,12 +16,22 @@ import com.rear_admirals.york_pirates.base.BaseScreen;
 
 import java.util.Random;
 
+/**
+ * Handles the GUI for the minigame
+ */
 public class MinigameScreen extends BaseScreen {
     private Player player;
     private Department department;
 
     private Label goldLabel;
 
+    /**
+     * MinigameScreen Constructor
+     * Creates the GUI elements of the screen
+     *
+     * @param main - the game which this MinigameScreen is part of
+     * @param department - the department this screen is for
+     */
     public MinigameScreen(final PirateGame main, final Department department) {
         super(main);
         //Contains the Games instance of the Player to change gold values

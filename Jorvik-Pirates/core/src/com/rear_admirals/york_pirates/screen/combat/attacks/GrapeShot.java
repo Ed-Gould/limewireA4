@@ -8,7 +8,13 @@ public class GrapeShot extends Attack {
         super(name, desc, dmgMultiplier, accMultiplier, skipMove, accPercent);
     }
 
-    // Grapeshot requires a custom doAttack function and as such has its own class.
+    /**
+     * Grapeshot requires a custom doAttack function and as such has its own class.
+     *
+     * @param attacker - ship making the attack
+     * @param defender - defending ship
+     * @return the damage caused by the attack
+     */
     @Override
     public int doAttack(Ship attacker, Ship defender) {
         this.damage = 0;

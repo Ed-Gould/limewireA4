@@ -10,12 +10,21 @@ import com.rear_admirals.york_pirates.base.BaseScreen;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Screen that displays when you either win the game or die
+ */
 public class VictoryScreen extends BaseScreen {
     private boolean hasWon;
     private int i;
     private Label scoreboardLabel,pointsLabel;
     private File scoreboard;
 
+    /**
+     * VictoryScreen Constructor
+     *
+     * @param main - the game which this Screen is part of
+     * @param hasWon - boolean whether or not the player has won the game
+     */
     public VictoryScreen(PirateGame main, Boolean hasWon) {
         super(main);
         //Stores if the User has Won or Lost

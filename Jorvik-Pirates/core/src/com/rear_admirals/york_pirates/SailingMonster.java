@@ -26,7 +26,8 @@ public class SailingMonster extends PhysicsActor {
 
     /**
      * SailingMonster constructor
-     * @param textureString
+     * @param textureString - the path to the file containing
+     * the desired texture for the monster
      */
     public SailingMonster(String textureString){
         this.texture = new Texture((Gdx.files.internal(textureString)));
@@ -43,10 +44,13 @@ public class SailingMonster extends PhysicsActor {
         return (int)((Math.random()*360));
     }
 
+    /**
+     * Moves the monster while avoiding obstacles in the map
+     *
+     * @param obstacleList - list of obstacles on the map
+     */
     public void move(ArrayList<BaseActor> obstacleList) {
-
         for (BaseActor obstacle : obstacleList) {
-
             if (this.overlaps(obstacle, false)) {
                 this.setAnchor(true);
                 direction = getRandomDirection();
@@ -60,10 +64,6 @@ public class SailingMonster extends PhysicsActor {
                 this.addAccelerationAS(this.getRotation(), 10000);
             }
         }
-    }
-
-    public void reverseVelocity(){
-        this.rotateBy(180);
     }
 
     @Override

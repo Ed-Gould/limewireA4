@@ -18,6 +18,9 @@ import static com.rear_admirals.york_pirates.PirateGame.Chemistry;
 import static com.rear_admirals.york_pirates.ShipType.*;
 import static com.rear_admirals.york_pirates.College.*;
 
+/**
+ * Handles the main menu GUI
+ */
 public class MainMenu extends BaseScreen {
     private Stage stage;
 

@@ -22,6 +22,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static com.rear_admirals.york_pirates.College.Langwith;
 
+/**
+ * Handles the GUI elements for the combat mode
+ */
 public class CombatScreen extends BaseScreen {
 
     // screen layout variables
@@ -85,6 +88,12 @@ public class CombatScreen extends BaseScreen {
     private int animationIndex = 0;
     private String displayText = "";
 
+    /**
+     * CombatScreen Constructor
+     *
+     * @param pirateGame - the game which this CollegeScreen is part of
+     * @param enemy - the enemy ship
+     */
     public CombatScreen(final PirateGame pirateGame, Ship enemy) {
         // Calls superclass BaseScreen
         super(pirateGame);
@@ -332,9 +341,10 @@ public class CombatScreen extends BaseScreen {
         bg_texture.dispose();
     }
 
-
+    /**
+     * Toggles the visibility of the players attack moves and changes input processor to relevant stage
+     */
     public void toggleAttackStage() {
-        // This method toggles the visibility of the players attack moves and changes input processor to relevant stage
         if (background_wood.isVisible()) {
             background_wood.setVisible(false);
             completeAttackTable.setVisible(false);
@@ -346,8 +356,11 @@ public class CombatScreen extends BaseScreen {
         }
     }
 
-    // combat Handler
-    //  This function handles the ship combat using BattleEvent enum type
+    /**
+     * Handles the ship combat using BattleEvent enum type
+     *
+     * @param status - current action happening in the battle
+     */
     public void combatHandler(BattleEvent status) {
         //Debugging
         System.out.println("Running combatHandler with status: " + status.toString());
@@ -503,8 +516,11 @@ public class CombatScreen extends BaseScreen {
         }
     }
 
-    // Button Listener Classes - creates a hover listener for any button passed through
-
+    /**
+     *  Button Listener Classes - creates a hover listener for any button passed through
+     *
+     * @param button
+     */
     public void buttonListener(final AttackButton button) {
         button.addListener(new ClickListener() {
             @Override
@@ -567,7 +583,9 @@ public class CombatScreen extends BaseScreen {
         });
     }
 
-    // This method updates the player HP bar and text values
+    /**
+     * Updates the player HP bar and text values
+     */
     public void updateHP() {
         enemyHP.setAnimateDuration(1);
         playerHP.setAnimateDuration(1);
@@ -587,7 +605,12 @@ public class CombatScreen extends BaseScreen {
         playerHP.setValue(player.getPlayerShip().getHealth());
     }
 
-    // Updates and displays text box
+    /**
+     * Updates and displays text box
+     *
+     * @param message - text to be displayed
+     * @param nextEvent - queues the next event to occur
+     */
     public void dialog(String message, final BattleEvent nextEvent) {
         queuedCombatEvent = nextEvent;
 
@@ -600,7 +623,11 @@ public class CombatScreen extends BaseScreen {
         textAnimation = true;
     }
 
-    // This method controls the animation of the dialog label
+    /**
+     * Controls the animation of the dialog label
+     *
+     * @param dt - delta time from last frame
+     */
     public void labelAnimationUpdate(float dt) {
         //A4: wood pieces number update
         playerWoods .setText("Woods: "+Integer.toString(player.getWoods()));

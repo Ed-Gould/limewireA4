@@ -2,7 +2,9 @@ package com.rear_admirals.york_pirates.screen.combat.attacks;
 
 import com.rear_admirals.york_pirates.Ship;
 
-
+/**
+ * Engineer's repair ability
+ */
 public class Repair extends Attack {
 
     protected Repair() {

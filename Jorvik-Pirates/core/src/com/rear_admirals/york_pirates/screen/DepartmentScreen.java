@@ -11,6 +11,9 @@ import com.badlogic.gdx.utils.Align;
 import com.rear_admirals.york_pirates.*;
 import com.rear_admirals.york_pirates.base.BaseScreen;
 
+/**
+ * Class for the GUI that appears when you interact with a department
+ */
 public class DepartmentScreen extends BaseScreen {
 
     private Player player;
@@ -22,6 +25,13 @@ public class DepartmentScreen extends BaseScreen {
 
     private int healthFromMax;
 
+    /**
+     * DepartmentScreen Constructor
+     * Creates the GUI elements of the screen
+     *
+     * @param main - the game which this DepartmentScreen is part of
+     * @param department - the department this screen is for
+     */
     public DepartmentScreen(final PirateGame main, final Department department) {
         super(main);
         player = main.getPlayer();
@@ -214,6 +224,13 @@ public class DepartmentScreen extends BaseScreen {
         Gdx.input.setInputProcessor(mainStage);
     }
 
+    /**
+     * Defines healing cost
+     * Added in Assessment 4
+     *
+     * @param health - current health of player
+     * @return - the cost to heal the player fully
+     */
     // A4: Added function to clearly define healing cost
     public int getHealCost(int health){ // Function to get the cost to heal to full:
         // if statement ensures player pays at least 1 gold to heal

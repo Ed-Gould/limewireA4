@@ -12,10 +12,18 @@ import com.rear_admirals.york_pirates.base.BaseScreen;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Handles the GUI displaying the high scores
+ */
 public class ScoreboardScreen extends BaseScreen {
     private Label scoreboardLabel;
     private File scoreboard;
 
+    /**
+     * ScoreboardScreen Constructor
+     *
+     * @param main - the game which this Screen is part of
+     */
     public ScoreboardScreen(PirateGame main) {
         super(main);
         scoreboard = new File("scoreboard.txt");

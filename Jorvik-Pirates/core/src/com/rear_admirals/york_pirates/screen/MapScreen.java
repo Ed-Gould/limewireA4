@@ -17,6 +17,9 @@ import com.badlogic.gdx.utils.Align;
 import com.rear_admirals.york_pirates.*;
 import com.rear_admirals.york_pirates.base.BaseScreen;
 
+/**
+ * Handles the GUI for the map the player can look at while sailing
+ */
 public class MapScreen extends BaseScreen {
     private Player player;
     private SailingMonster sailingMonster;
@@ -26,6 +29,13 @@ public class MapScreen extends BaseScreen {
     private float scalX,scalY;
     private float eventSize;
 
+    /**
+     * MapScreen Constructor
+     *
+     * @param main - the game which this Screen is part of
+     * @param sailingMonster - the monster to be displayed on map
+     * @param sailingWhirlpool - the whirlpool to be displayed on map
+     */
     public MapScreen(PirateGame main, SailingMonster sailingMonster, SailingWhirlpool sailingWhirlpool) {
         super(main);
         this.player = main.getPlayer();
@@ -62,6 +72,13 @@ public class MapScreen extends BaseScreen {
         Gdx.input.setInputProcessor(mainStage);
     }
 
+    /**
+     * place an image of an object on the map
+     *
+     * @param image
+     * @param x
+     * @param y
+     */
     public void setImage(Image image, float x, float y){
         image.setHeight(eventSize);
         image.setWidth(eventSize);

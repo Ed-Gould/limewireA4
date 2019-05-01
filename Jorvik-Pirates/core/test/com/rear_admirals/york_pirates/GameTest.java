@@ -31,8 +31,8 @@ import static com.rear_admirals.york_pirates.PirateGame.Chemistry;
  * Gets rid of those dependencies so no worrying about the implementation of
  * anything other than the method you're focused on testing
  *
- * Note - to use Mockito, you have to download the JAR and add it to the
- * project modules in Project Structure
+ * Note - to use Mockito, you have to download the JAR (or use the one conveniently
+ * placed in the 'libs' folder) and add it to the project modules in Project Structure
  */
 public class GameTest {
 

@@ -13,6 +13,9 @@ import com.rear_admirals.york_pirates.PirateGame;
 import com.rear_admirals.york_pirates.Player;
 import com.rear_admirals.york_pirates.base.BaseScreen;
 
+/**
+ * Class for the GUI that appears when you interact with a college
+ */
 public class CollegeScreen extends BaseScreen {
     private Player player;
 
@@ -23,6 +26,13 @@ public class CollegeScreen extends BaseScreen {
 
     private int healthFromMax;
 
+    /**
+     * CollegeScreen Constructor
+     * Creates the GUI elements of the screen
+     *
+     * @param main - the game which this CollegeScreen is part of
+     * @param college - the college this screen is for
+     */
     public CollegeScreen(PirateGame main, College college) {
         super(main);
         this.player = main.getPlayer();
@@ -177,7 +187,15 @@ public class CollegeScreen extends BaseScreen {
         Gdx.input.setInputProcessor(mainStage);
     }
 
-    // A4: Added function to clearly define healing cost
+
+    /**
+     * Defines healing cost
+     * Added in Assessment 4
+     *
+     * @param health - current health of player
+     * @return - the cost to heal the player fully
+     */
+    // A4:
     public int getHealCost(int health){ // Function to get the cost to heal to full:
         // if statement ensures player pays at least 1 gold to heal
         if (health / 10 == 0){

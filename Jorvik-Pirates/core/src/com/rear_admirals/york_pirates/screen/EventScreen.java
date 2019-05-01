@@ -40,7 +40,9 @@ import java.util.ArrayList;
 
 import static com.rear_admirals.york_pirates.College.Derwent;
 import static com.rear_admirals.york_pirates.ShipType.Player;
-
+/**
+ * Class for the screen and GUI of the monster chasing minigame
+ */
 public class EventScreen extends BaseScreen {
     private Ship playerShip;
     private Monster monster;
@@ -78,6 +80,11 @@ public class EventScreen extends BaseScreen {
     private Label eventStartLabel, eventWinLabel, eventLostLabel;
     private TextButton eventStartButton, eventWinButton, eventLostButton;
 
+    /**
+     * EventScreen Constructor
+     *
+     * @param main - the game which this EventScreen is part of
+     */
     public EventScreen(final PirateGame main){
         super(main);
 
@@ -336,6 +343,10 @@ public class EventScreen extends BaseScreen {
         }
     }
 
+    /**
+     * Check if the player ship has reached to point of the map to escape the monster
+     * @return
+     */
     public boolean isEndReached(){
         //7960 is the x coordinate for the end of the obstacles
         return this.playerShip.getX() > 7960;
